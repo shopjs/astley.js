@@ -1,0 +1,54 @@
+use 'sake-bundle'
+use 'sake-outdated'
+use 'sake-publish'
+use 'sake-version'
+
+option '-b', '--browser [browser]', 'browser to use for tests'
+option '-g', '--grep [filter]',     'test filter'
+option '-t', '--test [test]',       'specify test to run'
+option '-v', '--verbose',           'enable verbose test logging'
+
+task 'clean', 'clean project', ->
+  exec 'rm -rf lib'
+
+task 'build', 'build js', ['build:static'], ->
+  bundle.write
+    entry: 'src/index.coffee'
+    compilers:
+      coffee: version: 1
+
+task 'build:min', 'build js for production', ['build'], ->
+  yield bundle.write
+    entry:     'src/index.coffee'
+    format:    'web'
+    external:  false
+    sourceMap: false
+    browser:   false
+    compilers:
+      coffee: version: 1
+  yield exec 'uglifyjs astley.js -o astley.min.js'
+
+task 'build:static', 'build static assets', ->
+  exec '''
+    bebop compile'
+  '''
+
+task 'coverage', 'Process coverage statistics', ->
+  exec '''
+    cat ./coverage/lcov.info | coveralls
+    cat ./coverage/coverage.json | codecov
+    rm -rf coverage/
+    '''
+
+task 'watch', 'watch for changes and recompile project', ['build'], ->
+  watch 'src/*', -> invoke 'build'
+
+task 'watch:test', 'watch for changes and re-run tests', ->
+  invoke 'watch'
+
+  require('vigil').watch __dirname, (filename, stats) ->
+    if /^src/.test filename
+      invoke 'test'
+
+    if /^test/.test filename
+      invoke 'test', test: filename

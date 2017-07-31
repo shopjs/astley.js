@@ -1,0 +1,68 @@
+{
+  "name": "astley.js",
+  "version": "0.0.1",
+  "description": "Construct a website from a JSON-LD AST",
+  "homepage": "https://github.com/hanzo-io/astley.js",
+  "repository": "github.com/hanzo-io/astley.js",
+  "bugs": "http://github.com/hanzo-io/astley.js/issues",
+  "author": "Hanzo, Inc <hi@hanzo.io>",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "AST",
+    "Abstract Syntax Tree",
+    "memes",
+    "website",
+    "hanzo"
+  ],
+  "main": "lib/astley.js",
+  "module": "lib/astley.mjs",
+  "files": [
+    "lib/",
+    "src/"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "build": "sake build",
+    "pretest": "sake build",
+    "prepublishOnly": "sake build:min",
+    "test": "sake test"
+  },
+  "dependencies": {
+    "el.js": "^2.1.24",
+    "es-raf": "^3.3.1",
+    "layzk.js": "2.2.3",
+    "zepto-modules": "1.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "7.1.2",
+    "bebop": "1.12.5",
+    "clean-css": "4.1.7",
+    "codecov.io": "^0.1.6",
+    "coffee-script": "1.12.7",
+    "css-mqpacker": "6.0.1",
+    "es-raf": "3.3.1",
+    "esmangle": "1.0.1",
+    "ie-love": "0.0.3",
+    "lost": "8.2.0",
+    "lost-stylus": "0.1.3",
+    "postcss-discard-comments": "2.0.4",
+    "poststylus": "0.2.3",
+    "pug": "2.0.0-rc.2",
+    "reeeset": "0.0.8",
+    "rollup-analyzer": "1.0.2",
+    "rucksack-css": "0.9.1",
+    "rupture": "0.6.2",
+    "sake-bundle": "0.6.0",
+    "sake-cli": "0.5.21",
+    "sake-core": "1.5.1",
+    "sake-linked": "0.1.2",
+    "sake-outdated": "0.1.28",
+    "sake-publish": "0.1.16",
+    "sake-test": "0.1.5",
+    "sake-version": "0.1.19",
+    "stylus": "0.54.5",
+    "uglify-js": "github:mishoo/UglifyJS2#harmony"
+  }
+}
