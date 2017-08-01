@@ -30,42 +30,42 @@ class MenuComplex extends El.View
 
     if !first
       isRightOf = $('[data-menu-title="' + @menuToShow + '"]').offset().left < $el.offset().left
+      isLeftOf = $('[data-menu-title="' + @menuToShow + '"]').offset().left > $el.offset().left
 
       if isRightOf
         @slideDirection = 'right'
-        console.log 'from right'
-      else
+      else if isLeftOf
         @slideDirection = 'left'
-        console.log 'from left'
 
     @menuToShow = title
 
     $menu = $el.closest('menu-complex')
     $menuToShow = $menu.find('[data-menu="'+@menuToShow+'"] .menu-content')
 
-    left = $el.offset().left - $menu.offset().left + ($el.width() / 2)
+    left = $el.offset().left - $menu.offset().left + (($el.width() - $menuToShow.width()) / 2)
 
     $wrapper = $menu.find('.menu-wrapper')
-    $wrapper
-      .css
-        left: left
-        width: $menuToShow.width() + 'px'
-        height: $menuToShow.height() + 'px'
 
     if first
       $wrapper.css
-        transition: $wrapper.css('transition') + ', left 0s'
+        transition: $wrapper.css('transition') + ', transform 0s'
 
       raf ()->
         $wrapper.css
           transition: null
 
+    $wrapper
+      .css
+        transform: 'translateX(' + left + 'px)'
+        width: $menuToShow.width() + 'px'
+        height: $menuToShow.height() + 'px'
+
     console.log('Showing ' + $el.data('menu-title'))
 
   hideMenu: (e) ->
-    @menuToShow = '' if !$('[data-menu-title]:hover')[0] &&
-      !$('[data-menu-title]:focus')[0] &&
-      !$('.menu-wrapper:hover')[0]
+    if !$('[data-menu-title]:hover')[0] && !$('[data-menu-title]:focus')[0] && !$('.menu-wrapper:hover')[0]
+      @menuToShow = ''
+      console.log('Hiding ' + e)
 
 MenuComplex.register()
 
