@@ -13,7 +13,6 @@ header
       position: relative
       text-align: left
 
-
       // .menu-content is the part of the menu that expands and stuff
       .menu-body
         opacity: 0
@@ -28,7 +27,6 @@ header
         transform: translateX(-50%)
         width: 360px
         max-width: 100vw
-
 
         &:before
           content: ''
@@ -49,45 +47,6 @@ header
           box-shadow: 2px 4px 2px .5px $shadowColor2
           max-height: 'calc(100vh - %s - %s)' % ($headerHeight (2 * $spacing))
           overflow: auto
-
-          .menu-link
-            width: 100%
-            color: $textColor2
-            display: table
-            padding: $spacing 0
-
-            &:hover
-              .menu-link-icon
-                filter: saturate(40%) brightness(105%)
-
-              .menu-link-text
-                filter: brightness(300%)
-
-            .menu-link-icon
-            .menu-link-text
-              display: inline-block
-
-            .menu-link-icon
-              margin-right: 2 * $spacing
-              width: $headerHeight
-
-            .menu-link-text:first-child
-              width: 100%
-
-            .menu-link-text:not(:first-child)
-              width: 'calc(100% - %s - %s)' % ($headerHeight (2 * $spacing))
-
-              & > *
-                display: block
-
-              // Automatically work for both description and no description
-              // states
-              .menu-link-name:not(:last-child)
-                line-height: 2rem
-
-              .menu-link-description
-                line-height: 1.5rem
-                font-size: .875rem
 
       &:hover .menu-body
       &:focus .menu-body
@@ -110,6 +69,121 @@ header
       position: relative
       text-align: left
 
+    .menu-wrapper
+      position: absolute
+      background-color: $backgroundColor1
+      transition: all ($transitionTime) ease-in-out
+      box-shadow: 2px 4px 2px .5px $shadowColor2
+      pointer-events: none
+      transform-origin: top center
+      transform: translateX(-50%) translateY(2 * $spacing)
+      opacity: 0
+
+      &.active
+        pointer-events: auto
+        transition: all ($transitionTime * .75) ease-in-out, opacity $transitionTime ease-in-out
+        transform: translateX(-50%) translateY(0)
+        opacity: 1
+
+      &:before
+        content: ''
+        width:  2 * $spacing
+        height: 2 * $spacing
+        position: absolute
+        bottom: 100%
+        background-color: $backgroundColor1
+        left: 50%
+        transform: translate(-50%, 50%) rotate(45deg)
+
+      .menu-bodies
+        vertical-align: top
+        position: absolute
+        left: 0
+        height: 100%
+        width: 100%
+
+        .menu-body
+          color: $textColor2
+          height: 100%
+          width: 100%
+          position: absolute
+          left: 0
+          overflow: hidden
+          opacity: 0
+          transition: opacity ($transitionTime * .75) ease-in-out
+
+          .menu-content
+            display: table
+            position: absolute
+            left: 0
+            top: 0
+            max-width: 100%
+            width: 400px
+            padding: $spacing 2 * $spacing
+            background-color: $backgroundColor1
+            max-height: 'calc(100vh - %s - %s)' % ($headerHeight (2 * $spacing))
+            overflow: auto
+
+            .menu-link
+              a
+                color: $textColor2
+
+          &.active
+            opacity: 1
+
+            &.from-left
+              .menu-content
+                animation: from-left ($transitionTime * .75) ease-in-out
+
+            &.from-right
+              .menu-content
+                animation: from-right ($transitionTime * .75) ease-in-out
+
   // END Complex Menus
+
+  // START Menu Link (Both Complex and Simple)
+  .menu-link
+    width: 100%
+    display: table
+    padding: $spacing 0
+
+    &:hover
+      .menu-link-icon
+        filter: saturate(40%) brightness(105%)
+
+      .menu-link-text
+        filter: brightness(300%)
+
+    a
+      color: $textColor2
+      display: table
+      width: 100%
+
+    .menu-link-icon
+    .menu-link-text
+      display: inline-block
+
+    .menu-link-icon
+      margin-right: 2 * $spacing
+      width: $headerHeight
+
+    .menu-link-text:first-child
+      width: 100%
+
+    .menu-link-text:not(:first-child)
+      width: 'calc(100% - %s - %s)' % ($headerHeight (2 * $spacing))
+
+      & > *
+        display: block
+
+      // Automatically work for both description and no description
+      // states
+      .menu-link-name:not(:last-child)
+        line-height: 2rem
+
+      .menu-link-description
+        line-height: 1.5rem
+        font-size: .875rem
+  // END Menu Link (Both Complex and Simple)
 
 // END Header Navigation Menus
