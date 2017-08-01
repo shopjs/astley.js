@@ -1,3 +1,5 @@
+# astley.js
+
 Library for rendering a website AST into semantic aware template.  Separate the
 content structure from the template structure to easily transform your website.
 
@@ -13,15 +15,15 @@ AST.
 
 @context for the topmost element is
 
-`
+```
 '@context': 'hanzo.ai/schema'
-`
+```
 
 ---
 
 ## WebsiteHeader
 
-`
+```
 {
   '@type': 'WebsiteHeader'
   # type - rendering mode, default template supports 'complex' and 'simple' header menus
@@ -33,7 +35,7 @@ AST.
   # menu group
   menuCollections: [ WebsiteMenuCollection ]
 }
-`
+```
 
 WebsiteHeader is the top header menu of a webpage
 
@@ -41,7 +43,7 @@ WebsiteHeader is the top header menu of a webpage
 
 ## WebsiteLogo
 
-`
+```
 {
   '@type': 'WebsiteLogo'
   # image - logo image url
@@ -53,8 +55,7 @@ WebsiteHeader is the top header menu of a webpage
   # url - logo url
   url: string
 }
-
-`
+```
 
 WebsiteLogo is an image + text logo
 
@@ -62,13 +63,13 @@ WebsiteLogo is an image + text logo
 
 ## WebSiteMenuCollection
 
-`
+```
 {
   '@type': 'WebsiteMenuCollection'
-  # menus - list of WebsiteMenus in group/collection
+  // menus - list of WebsiteMenus in group/collection
   menus: [ WebsiteMenu ]
 }
-`
+```
 
 WebsiteMenuCollection is a grouped collection of WebsiteMenus for the purposes
 of organizing related menus
@@ -77,7 +78,7 @@ of organizing related menus
 
 ## WebSiteMenu
 
-`
+```
 {
   '@type': 'WebsiteMenu'
   # name - menu display name
@@ -86,7 +87,7 @@ of organizing related menus
   url: string
   links: [ WebsiteMenuLink ]
 }
-`
+```
 
 WebsiteMenu is a menu which may be a link itself or a menu containing links
 
@@ -94,7 +95,7 @@ WebsiteMenu is a menu which may be a link itself or a menu containing links
 
 ## WebsiteMenuLink
 
-`
+```
 {
   '@type': 'WebsiteMenuLink'
   # name - link display name
@@ -106,6 +107,6 @@ WebsiteMenu is a menu which may be a link itself or a menu containing links
   # image - link url
   url: string
 }
-`
+```
 
 WebsiteMenuLink is a url link with associated image and description
