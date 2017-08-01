@@ -1,5 +1,6 @@
-import MenuComplex from './menu-complex'
+import HeaderMenuComplex from './header-menu-complex'
+import './menu'
 
 export {
-  MenuComplex
+  HeaderMenuComplex
 }

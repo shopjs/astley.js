@@ -2,8 +2,8 @@ import $ from 'zepto-modules'
 import El from 'el.js'
 import { raf } from 'es-raf'
 
-class MenuComplex extends El.View
-  tag: 'menu-complex'
+class HeaderMenuComplex extends El.View
+  tag: 'header-menu-complex'
   html: '<yield/>'
 
   # Show this menu
@@ -39,7 +39,7 @@ class MenuComplex extends El.View
 
     @menuToShow = title
 
-    $menu = $el.closest('menu-complex')
+    $menu = $el.closest(@tag)
     $menuToShow = $menu.find('[data-menu="'+@menuToShow+'"] .menu-content')
 
     left = $el.offset().left - $menu.offset().left + (($el.width() - $menuToShow.width()) / 2)
@@ -67,6 +67,6 @@ class MenuComplex extends El.View
       @menuToShow = ''
       console.log('Hiding ' + e)
 
-MenuComplex.register()
+HeaderMenuComplex.register()
 
-export default MenuComplex
+export default HeaderMenuComplex

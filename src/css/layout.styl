@@ -3,9 +3,11 @@ footer
 main > *
   width: 100vw
   +above($pageWidth + 1)
-    padding: 0 'calc((100% - %s) / 2)' % $pageWidth
+    padding-left: 'calc((100% - %s) / 2)' % $pageWidth
+    padding-right: 'calc((100% - %s) / 2)' % $pageWidth
   +below($pageWidth)
-    padding 0 1rem
+    padding-left 1rem
+    padding-right 1rem
 
 main > *
   position: relative
