@@ -21,6 +21,26 @@ AST.
 
 ---
 
+## Website
+
+```
+{
+  '@type': 'Website'
+  # head - website head, title, description, opengraph
+  head: WebsiteHead
+  # header - website header, navigation, top menus
+  header: WebsiteHeader
+  # main - website body, content, etc
+  main: [ WebsiteSection ]
+  # footer - website footer, navigation
+  footer: WebsiteFooter
+}
+```
+
+Website root node
+
+---
+
 ## WebsiteHeader
 
 ```
@@ -110,3 +130,104 @@ WebsiteMenu is a menu which may be a link itself or a menu containing links
 ```
 
 WebsiteMenuLink is a url link with associated image and description
+
+---
+
+## WebsiteSection
+
+```
+{
+  '@type': 'WebsiteSection'
+  # name - section name
+  name: string
+  # type - type of section, supports specific types
+  type: hero | block | cta
+  # class - class names like html tag class
+  class: string
+  # id - id
+  id: string
+  # content - list of content
+  content: [ WebsiteText | WebsiteImage | WebsiteButton | WebsiteContent ]
+}
+```
+
+WebsiteSection containes website primatives
+
+---
+
+## WebsiteContent
+
+```
+{
+  '@type': 'WebsiteContent'
+  # class - class names like html tag class
+  class: string
+  # id - id
+  id: string
+  # content - list of content
+  content: [ WebsiteText | WebsiteImage | WebsiteButton | WebsiteContent ]
+}
+```
+
+WebsiteContent allows tree-like structuring of data, not necessarily rendered,
+just organizational.  Usually inferred by the content-annotator
+
+---
+
+## WebsiteText
+
+```
+{
+  '@type': 'WebsiteText'
+  # class - class names like html tag class
+  class: string
+  # id - id
+  id: string
+  # text - text
+  text: string
+  # level - level (h1, h2, h3, h4, p, small)
+  level: string
+}
+```
+
+WebsiteText primative
+
+---
+
+## WebsiteImage
+
+```
+{
+  '@type': 'WebsiteImage'
+  # class - class names like html tag class
+  class: string
+  # id - id
+  id: string
+  # src - source
+  src: string
+  # alt - alt text
+  alt: string
+}
+```
+
+WebsiteImage primative
+
+---
+
+## WebsiteLink
+
+```
+{
+  '@type': 'WebsiteLink'
+  # class - class names like html tag class
+  class: string
+  # id - id
+  id: string
+  # text - link text
+  text: string
+  # url - link url
+  url: string
+}
+```
+
+WebsiteLink primative

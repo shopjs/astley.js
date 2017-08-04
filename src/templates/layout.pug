@@ -23,15 +23,21 @@ html(lang='en')
     //(style='overflow:hidden')
     // Header
     block preheader
+    block header
+      - {
+      -   let item = data.header
+          header
+            include header.pug
+      - }
 
-    - for(var item of data) {
-      if item['@type'] == 'WebsiteHeader'
-        header
-          include header.pug
-    - }
 
     main
       block content
+        - for(var i in data.main) {
+          - let item = data.main[i]
+          if i == 0
+            include hero.pug
+        - }
 
     footer
       include footer.pug

@@ -2,6 +2,8 @@ import $ from 'zepto-modules'
 import El from 'el.js'
 import { raf } from 'es-raf'
 
+import './header-menu'
+
 class HeaderMenuComplex extends El.View
   tag: 'header-menu-complex'
   html: '<yield/>'

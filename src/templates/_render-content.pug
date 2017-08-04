@@ -1,0 +1,37 @@
+// Not useable yet
+if content['@type'] == 'WebsiteText'
+  if content.level == 'h1'
+    h1(id=content.id, class=content.class, itemscope, itemtype='WebsiteText', itemprop='text') !{ content.text }
+      meta(itemprop='class' content=content.class)
+      meta(itemprop='id' content=content.id)
+  else if content.level == 'h2'
+    h2(id=content.id, class=content.class, itemscope, itemtype='WebsiteText', itemprop='text') !{ content.text }
+      meta(itemprop='class' content=content.class)
+      meta(itemprop='id' content=content.id)
+  else if content.level == 'h3'
+    h3(id=content.id, class=content.class, itemscope, itemtype='WebsiteText', itemprop='text') !{ content.text }
+      meta(itemprop='class' content=content.class)
+      meta(itemprop='id' content=content.id)
+  else if content.level == 'h4'
+    h4(id=content.id, class=content.class, itemscope, itemtype='WebsiteText', itemprop='text') !{ content.text }
+      meta(itemprop='class' content=content.class)
+      meta(itemprop='id' content=content.id)
+  else if content.level == 'p'
+    p(id=content.id, class=content.class, itemscope, itemtype='WebsiteText', itemprop='text') !{ content.text }
+      meta(itemprop='class' content=content.class)
+      meta(itemprop='id' content=content.id)
+  else if content.level == 'small'
+    small(id=content.id, class=content.class, itemscope, itemtype='WebsiteText', itemprop='text') !{ content.text }
+      meta(itemprop='class' content=content.class)
+      meta(itemprop='id' content=content.id)
+else if content['@type'] == 'WebsiteImage'
+  .image(id=content.id, class=content.class, itemscope, itemtype='WebsiteImage')
+    img(src=content.src, alt=content.alt, itemprop='src')
+    meta(itemprop='alt' content=content.alt)
+    meta(itemprop='class' content=content.class)
+    meta(itemprop='id' content=content.id)
+else if content['@type'] == 'WebsiteLink'
+  a(id=content.id, class=content.class, itemscope, itemtype='WebsiteLink', href=content.url)=content.text
+    meta(itemprop='text' content=content.text)
+    meta(itemprop='class' content=content.class)
+    meta(itemprop='id' content=content.id)
