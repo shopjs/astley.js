@@ -7,7 +7,7 @@ import HanzoAnalytics from 'hanzo-analytics'
 
 export default init = (orgId)->
   HanzoAnalytics.orgId = orgId
-  HanzoAnalytics.onFocus (record)->
+  HanzoAnalytics.onFocus = (record)->
     console.log 'Record', record
 
   El.mount '*'
