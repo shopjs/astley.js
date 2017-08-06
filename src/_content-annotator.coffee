@@ -1,9 +1,57 @@
 import $ from 'zepto-modules'
 import El from 'el.js'
+import HanzoAnalytics from 'hanzo-analytics'
+
+get$targetAndSelector = (e)->
+  selectors = []
+
+  $target = $(e.target)
+
+  if !$target.is('[itemscope]')
+    $parent = $target.closest('[itemscope]')
+    if $parent[0]
+      $target = $parent
+
+  target = $target[0]
+  _selector = target.selector
+
+  if !_selector?
+    $target.parents().each (i, el)->
+      $el = $(el)
+      selector = el.tagName
+      id = $el.attr 'id'
+      if id
+        selector += '#' + id
+      clas = $el.attr 'class'
+      if clas
+        selector += '.' + clas.replace /\s/g, '.'
+
+      selectors.push selector
+
+      _selector = selectors.reverse().join ' > '
+      target._selector = _selector
+
+  return [$target, _selector]
 
 class Annotator extends El.View
   tag: 'annotator'
   html: '<yield/>'
+
+  bindEvents: ()->
+    $root = $(@root)
+
+    # Bind Event Listeners
+    $root.on 'mouseenter', '[itemscope]', (e)->
+      [$target, _selector] = get$targetAndSelector(e)
+      HanzoAnalytics 'MouseEnter',
+        selector: _selector
+        type:     $target.attr 'itemtype'
+        mouseX:   e.clientX
+        mouseY:   e.clientY
+
+    # $root.on 'mouseleave', (e)>
+
+    #   HanzoAnalytics 'MouseLeave'
 
   init: ()->
     super
@@ -155,5 +203,7 @@ class Annotator extends El.View
         json.content.push(content)
 
       console.log 'content', json
+
+      @bindEvents()
 
 export default Annotator
