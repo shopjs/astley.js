@@ -28,8 +28,8 @@ get$targetAndSelector = (e)->
 
       selectors.push selector
 
-      _selector = selectors.reverse().join ' > '
-      target._selector = _selector
+    _selector = selectors.reverse().join ' > '
+    target._selector = _selector
 
   return [$target, _selector]
 
