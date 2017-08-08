@@ -9,6 +9,7 @@ export default init = (orgId)->
   HanzoAnalytics.orgId = orgId
   HanzoAnalytics.onFocus = (record)->
     console.log 'Record', record
+  HanzoAnalytics.flushRate = 10000
 
   El.mount '*'
 
