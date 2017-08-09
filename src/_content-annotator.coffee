@@ -1,6 +1,36 @@
 import $ from 'zepto-modules'
+import 'zepto-modules/selector'
 import El from 'el.js'
 import HanzoAnalytics from 'hanzo-analytics'
+
+# https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
+isElementInViewport = (rect)->
+  return rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && #or $(window).height()
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth) # $(window).width()
+
+debounce = (func, wait, immediate)->
+  timeout = null
+  return ()->
+    context = @
+    args = arguments
+    later = ()->
+      timeout = null
+      func.apply(context, args) if !immediate
+    callNow = immediate && !timeout
+    clearTimeout timeout
+    timeout = setTimeout later, wait
+    func.apply(context, args) if callNow
+
+getScrollPosition = ()->
+  supportPageOffset = window.pageXOffset != undefined
+  isCSS1Compat = ((document.compatMode || "") == "CSS1Compat")
+
+  x = if supportPageOffset then window.pageXOffset else if isCSS1Compat then document.documentElement.scrollLeft else document.body.scrollLeft
+  y = if supportPageOffset then window.pageYOffset else if isCSS1Compat then document.documentElement.scrollTop else document.body.scrollTop
+
+  return [x, y]
 
 get$targetAndSelector = (e)->
   selectors = []
@@ -37,21 +67,71 @@ class Annotator extends El.View
   tag: 'annotator'
   html: '<yield/>'
 
+  # Bind Event Listeners
   bindEvents: ()->
     $root = $(@root)
 
-    # Bind Event Listeners
     $root.on 'mouseenter', '[itemscope]', (e)->
       [$target, _selector] = get$targetAndSelector(e)
+      [x, y] = getScrollPosition
+      rect = el.getBoundingClientRect()
       HanzoAnalytics 'MouseEnter',
-        selector: _selector
-        type:     $target.attr 'itemtype'
-        mouseX:   e.clientX
-        mouseY:   e.clientY
+        selector:   _selector
+        type:       $target.attr 'itemtype'
+        mouseX:     e.clientX
+        mouseY:     e.clientY
+        scrollX:    x
+        scrollY:    y
+        contentX:   rect.left
+        contentY:   rect.top
 
-    # $root.on 'mouseleave', (e)>
+    $root.on 'mouseleave', '[itemscope]', (e)->
+      [$target, _selector] = get$targetAndSelector(e)
+      [x, y] = getScrollPosition
+      rect = el.getBoundingClientRect()
+      HanzoAnalytics 'MouseLeave',
+        selector:   _selector
+        type:       $target.attr 'itemtype'
+        mouseX:     e.clientX
+        mouseY:     e.clientY
+        scrollX:    x
+        scrollY:    y
+        contentX:   rect.left
+        contentY:   rect.top
 
-    #   HanzoAnalytics 'MouseLeave'
+    scrollFn = debounce (e)=>
+      $visible = $('[itemscope]:visible')
+      $visible.each (i, el)->
+        rect = el.getBoundingClientRect()
+        if !el._inViewport && isElementInViewport(rect)
+          [$target, _selector] = get$targetAndSelector(e)
+          [x, y] = getScrollPosition
+
+          HanzoAnalytics 'ViewportEnter',
+            selector:   _selector
+            type:       $target.attr 'itemtype'
+            mouseX:     e.clientX
+            mouseY:     e.clientY
+            scrollX:    x
+            scrollY:    y
+            contentX:   rect.left
+            contentY:   rect.top
+
+          el._inViewport = false
+        else if el._inViewport && !isElementInViewport(rect)
+          [$target, _selector] = get$targetAndSelector(e)
+          [x, y] = getScrollPosition
+          HanzoAnalytics 'ViewportLeave',
+            selector:   _selector
+            type:       $target.attr 'itemtype'
+            mouseX:     e.clientX
+            mouseY:     e.clientY
+            contentX:   rect.left
+            contentY:   rect.top
+          el._inViewport = true
+    , 1000, true
+
+    $(window).on 'DOMContentLoaded load resize scroll', scrollFn
 
   init: ()->
     super
