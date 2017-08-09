@@ -84,6 +84,7 @@ class Annotator extends El.View
         scrollY:    y
         contentX:   rect.left
         contentY:   rect.top
+        contentY:   contentY
 
     $root.on 'mouseleave', '[itemscope]', (e)->
       [$target, _selector] = get$targetAndSelector(e)
@@ -117,7 +118,8 @@ class Annotator extends El.View
             contentX:   rect.left
             contentY:   rect.top
 
-          el._inViewport = false
+          el._inViewport = true
+
         else if el._inViewport && !isElementInViewport(rect)
           [$target, _selector] = get$targetAndSelector(e)
           [x, y] = getScrollPosition
@@ -126,10 +128,13 @@ class Annotator extends El.View
             type:       $target.attr 'itemtype'
             mouseX:     e.clientX
             mouseY:     e.clientY
+            scrollX:    x
+            scrollY:    y
             contentX:   rect.left
             contentY:   rect.top
-          el._inViewport = true
-    , 1000, true
+
+          el._inViewport = false
+    , 200, true
 
     $(window).on 'DOMContentLoaded load resize scroll', scrollFn
 
