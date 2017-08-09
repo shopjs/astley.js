@@ -43,25 +43,30 @@ get$targetAndSelector = (e)->
       $target = $parent
 
   target = $target[0]
-  _selector = target.selector
+  _selector = getSelector(target)
+
+  return [$target, _selector]
+
+getSelector = (el)->
+  _selector = el._selector
 
   if !_selector?
-    $target.parents().each (i, el)->
-      $el = $(el)
-      selector = el.tagName
-      id = $el.attr 'id'
+    $el.parents().each (i, p)->
+      $p = $(p)
+      selector = p.tagName
+      id = $p.attr 'id'
       if id
         selector += '#' + id
-      clas = $el.attr 'class'
+      clas = $p.attr 'class'
       if clas
         selector += '.' + clas.replace /\s/g, '.'
 
       selectors.push selector
 
     _selector = selectors.reverse().join ' > '
-    target._selector = _selector
+    el._selector = _selector
 
-  return [$target, _selector]
+  return _selector
 
 class Annotator extends El.View
   tag: 'annotator'
@@ -101,11 +106,11 @@ class Annotator extends El.View
         contentY:   rect.top
 
     scrollFn = debounce (e)=>
-      $visible = $('[itemscope]:visible')
+      $visible = $(@root).find('[itemscope]:visible')
       $visible.each (i, el)->
         rect = el.getBoundingClientRect()
         if !el._inViewport && isElementInViewport(rect)
-          [$target, _selector] = get$targetAndSelector(e)
+          _selector = getSelector el
           [x, y] = getScrollPosition
 
           HanzoAnalytics 'ViewportEnter',
@@ -121,8 +126,9 @@ class Annotator extends El.View
           el._inViewport = true
 
         else if el._inViewport && !isElementInViewport(rect)
-          [$target, _selector] = get$targetAndSelector(e)
+          _selector = getSelector el
           [x, y] = getScrollPosition
+
           HanzoAnalytics 'ViewportLeave',
             selector:   _selector
             type:       $target.attr 'itemtype'
