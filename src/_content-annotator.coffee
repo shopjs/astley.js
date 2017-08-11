@@ -4,12 +4,14 @@ import El from 'el.js'
 import HanzoAnalytics from 'hanzo-analytics'
 
 # https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
+# rectangle overlap check
 isElementInViewport = (rect)->
   return rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && #or $(window).height()
     rect.right <= (window.innerWidth || document.documentElement.clientWidth) # $(window).width()
 
+# debounce a function
 debounce = (func, wait, immediate)->
   timeout = null
   return ()->
@@ -23,6 +25,7 @@ debounce = (func, wait, immediate)->
     timeout = setTimeout later, wait
     func.apply(context, args) if callNow
 
+# return viewport top left x/y
 getScrollPosition = ()->
   supportPageOffset = window.pageXOffset != undefined
   isCSS1Compat = ((document.compatMode || "") == "CSS1Compat")
@@ -32,9 +35,8 @@ getScrollPosition = ()->
 
   return [x, y]
 
+# return $target and selector for event
 get$targetAndSelector = (e)->
-  selectors = []
-
   $target = $(e.target)
 
   if !$target.is('[itemscope]')
@@ -47,7 +49,20 @@ get$targetAndSelector = (e)->
 
   return [$target, _selector]
 
+# return selector for current element
 getSelector = (el)->
+  $el = $(el)
+
+  selector = el.tagName
+  id = $el.attr 'id'
+  if id
+    selector += '#' + id
+  clas = $el.attr 'class'
+  if clas
+    selector += '.' + clas.replace /\s/g, '.'
+
+  selectors = [selector]
+
   _selector = el._selector
 
   if !_selector?
@@ -79,7 +94,7 @@ class Annotator extends El.View
     $root.on 'mouseenter', '[itemscope]', (e)->
       [$target, _selector] = get$targetAndSelector(e)
       [x, y] = getScrollPosition
-      rect = el.getBoundingClientRect()
+      rect = e.target.getBoundingClientRect()
       HanzoAnalytics 'MouseEnter',
         selector:   _selector
         type:       $target.attr 'itemtype'
@@ -89,12 +104,13 @@ class Annotator extends El.View
         scrollY:    y
         contentX:   rect.left
         contentY:   rect.top
-        contentY:   contentY
+        viewportX:  document.documentElement.clientHeight
+        viewportY:  document.documentElement.clientWidth
 
     $root.on 'mouseleave', '[itemscope]', (e)->
       [$target, _selector] = get$targetAndSelector(e)
       [x, y] = getScrollPosition
-      rect = el.getBoundingClientRect()
+      rect = e.target.getBoundingClientRect()
       HanzoAnalytics 'MouseLeave',
         selector:   _selector
         type:       $target.attr 'itemtype'
@@ -104,6 +120,10 @@ class Annotator extends El.View
         scrollY:    y
         contentX:   rect.left
         contentY:   rect.top
+        viewportX:   rect.left
+        viewportY:   rect.top
+        viewportX:  document.documentElement.clientHeight
+        viewportY:  document.documentElement.clientWidth
 
     scrollFn = debounce (e)=>
       $visible = $(@root).find('[itemscope]:visible')
@@ -112,35 +132,41 @@ class Annotator extends El.View
         if !el._inViewport && isElementInViewport(rect)
           _selector = getSelector el
           [x, y] = getScrollPosition
+          console.log(_selector, 'entered viewport')
 
           HanzoAnalytics 'ViewportEnter',
             selector:   _selector
-            type:       $target.attr 'itemtype'
+            type:       $(el).attr 'itemtype'
             mouseX:     e.clientX
             mouseY:     e.clientY
             scrollX:    x
             scrollY:    y
             contentX:   rect.left
             contentY:   rect.top
+            viewportX:  document.documentElement.clientHeight
+            viewportY:  document.documentElement.clientWidth
 
           el._inViewport = true
 
         else if el._inViewport && !isElementInViewport(rect)
           _selector = getSelector el
           [x, y] = getScrollPosition
+          console.log(_selector, 'left viewport')
 
           HanzoAnalytics 'ViewportLeave',
             selector:   _selector
-            type:       $target.attr 'itemtype'
+            type:       $(el).attr 'itemtype'
             mouseX:     e.clientX
             mouseY:     e.clientY
             scrollX:    x
             scrollY:    y
             contentX:   rect.left
             contentY:   rect.top
+            viewportX:  document.documentElement.clientHeight
+            viewportY:  document.documentElement.clientWidth
 
           el._inViewport = false
-    , 200, true
+    , 10, true
 
     $(window).on 'DOMContentLoaded load resize scroll', scrollFn
 

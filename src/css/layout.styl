@@ -21,3 +21,21 @@ main
 
 [tabindex]
   outline: none
+
+// .two-columns
+//   & > *
+//     column 1/2 2 0
+//     top: 50%
+//     transform: translateY(-50%)
+
+// Should Overwrite Others if available
+.flex-columns
+  display: box
+  display: flexbox
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+  & > *
+    flex: 1
