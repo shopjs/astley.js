@@ -231,3 +231,22 @@ WebsiteImage primative
 ```
 
 WebsiteLink primative
+
+---
+
+## WebsiteHeader
+
+```
+{
+  '@type': 'WebsiteFooter'
+  # logos - logos to display in the footers
+  logos: [ WebsiteLogo ]
+  # menuCollections - grouped menus to render in the footer
+  menuCollections: [ WebsiteMenuCollection ]
+}
+```
+
+WebsiteFooter is the bottom footer menu of a webpage
+
+---
+

@@ -2,6 +2,7 @@ import $ from 'zepto-modules'
 import 'zepto-modules/selector'
 import El from 'el.js'
 import HanzoAnalytics from 'hanzo-analytics'
+import { debounce } from './utils'
 
 # https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
 # rectangle overlap check
@@ -10,20 +11,6 @@ isElementInViewport = (rect)->
     rect.left >= 0 &&
     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && #or $(window).height()
     rect.right <= (window.innerWidth || document.documentElement.clientWidth) # $(window).width()
-
-# debounce a function
-debounce = (func, wait, immediate)->
-  timeout = null
-  return ()->
-    context = @
-    args = arguments
-    later = ()->
-      timeout = null
-      func.apply(context, args) if !immediate
-    callNow = immediate && !timeout
-    clearTimeout timeout
-    timeout = setTimeout later, wait
-    func.apply(context, args) if callNow
 
 # return viewport top left x/y
 getScrollPosition = ()->

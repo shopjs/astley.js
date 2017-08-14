@@ -1,4 +1,5 @@
 // START Header Navigation Menus
+
 header
 
   // START Simple Menus
@@ -147,6 +148,92 @@ header
 
   // END Complex Menus
 
+  // START Mobile Menus
+
+  .mobile-menus
+    +above($phoneWidth + 1)
+      display: none
+
+    .show-mobile-icon
+      position: absolute
+      top: 0
+      line-height: $headerHeight * .9
+      font-size: 1.5 * $spacing
+      right: $spacing
+      display: block
+      cursor: default
+
+    .close-mobile-icon
+      font-size: 2rem
+      position: absolute
+      top: $spacing
+      left: $spacing
+      line-height: 1rem
+
+    .mobile-menu-content
+      position: absolute
+      top: 0
+      left: -1 * $mobileMenuWidth
+      display: block
+      width: $mobileMenuWidth
+      height: 100vh
+      background: $menuBackgroundColor2
+      transition: left ($transitionTime) ease-in-out
+      box-shadow: 2px 4px 2px .5px $shadowColor2
+
+      &:before
+        content: ''
+        display: block
+        position: absolute
+        top: -1 * $headerDockedMargin
+        width: 100%
+        height: $headerDockedMargin
+        background: $menuBackgroundColor2
+        box-shadow: 2px 4px 2px .5px $shadowColor2
+        z-index: -1
+
+      .mobile-menu-wrapper
+        height: 100vh
+        width: 100%
+        overflow: auto
+        padding: ($spacing * 3) 0
+
+      .menu-collection
+        .menu
+          input[type=checkbox]
+            display: none
+
+          .menu-body
+            max-height: 0
+            transition: max-height ($transitionTime * 1.5) ease-in-out
+            overflow: hidden
+            background-color: $menuBackgroundColor1
+
+            .menu-content
+              padding: (.5 * $spacing) $spacing
+
+          // expand menu on hover or if selected
+          .menu-title:hover
+          input:checked
+            & ~ .menu-body
+              max-height: 100vh
+
+          // expand menu if it itself is hovered
+          .menu-body:hover
+            max-height: 100vh
+
+        .menu-title
+        & > a
+          color: $textColor1
+          text-decoration: none
+          display: block
+          width: 100%
+          background-color: $menuBackgroundColor2
+          text-align: center
+          padding: ($spacing * .5)
+
+  // END Mobile Menus
+
   // START Menu Link (Both Complex and Simple)
   .menu-link
     width: 100%
@@ -197,3 +284,39 @@ header
   // END Menu Link (Both Complex and Simple)
 
 // END Header Navigation Menus
+
+// START Mobile Menus Checked
+
+#show-mobile-menu
+  display: none
+
+#show-mobile-menu:checked ~ header
+  .mobile-menus
+    .mobile-menu-content
+      left: 0
+
+// END Mobile Menus Checked
+
+// START Footer Menus
+
+footer
+  .footer-menu
+    display: box
+    display: flexbox
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: flex-start
+
+    & > *
+      flex: 1
+      color: $textColor2
+
+      a
+        text-decoration: none
+        color: $textColor2
+        // fix weird opacity bug
+        display: inline-block
+        width: 100%
+
+// END Footer Menus

@@ -17,10 +17,17 @@ class HeaderMenuComplex extends El.View
   init: ()->
     super
 
-    @one 'mount', ()=>
+    hideMenu = @hideMenu.bind @
+
+    @on 'mount', ()=>
       @showMenu
         target: $('[data-menu-title]')[0]
       @menuToShow = ''
+
+      $(document).on 'mousemove', hideMenu
+
+    @on 'unmount', ()->
+      $(document).off 'mousemove', hideMenu
 
   showMenu: (e) ->
     @slideDirection = ''
@@ -68,6 +75,8 @@ class HeaderMenuComplex extends El.View
     if !$('[data-menu-title]:hover')[0] && !$('[data-menu-title]:focus')[0] && !$('.menu-wrapper:hover')[0]
       @menuToShow = ''
       console.log('Hiding ' + e)
+      # schedule update just in case
+      @scheduleUpdate()
 
 HeaderMenuComplex.register()
 

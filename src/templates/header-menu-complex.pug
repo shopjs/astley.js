@@ -1,6 +1,6 @@
 header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
   meta(itemprop='type', content='complex')
-  div.left.logo
+  div.left.logos
     each logo in item.logos
       a.logo-link(href=logo.url, itemprop='logos', itemscope, itemtype='WebsiteLogo')
         if logo.image
@@ -52,6 +52,10 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
                         .menu-link-name(itemprop='name')=link.name
                         if link.description
                           .menu-link-description(itemprop='description')=link.description
+          else
+            span.meta-only(itemprop='menus', itemscope, itemtype='WebsiteMenu')
+              meta(itemprop='url', content=menu.url)
+              meta(itemprop='name', content=menu.name)
 
     if item.menuCollections[1]
       .menu-bodies(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
@@ -68,3 +72,8 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
                         .menu-link-name(itemprop='name')=link.name
                         if link.description
                           .menu-link-description(itemprop='description')=link.description
+          else
+            span.meta-only(itemprop='menus', itemscope, itemtype='WebsiteMenu')
+              meta(itemprop='url', content=menu.url)
+              meta(itemprop='name', content=menu.name)
+

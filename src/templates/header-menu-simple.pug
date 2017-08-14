@@ -26,8 +26,9 @@ header-menu-simple.simple-menus(itemscope, itemtype='WebsiteHeader')
                         if link.description
                           .menu-link-description(itemprop='description')=link.description
         else
-          a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
-            span(itemprop='name')=menu.name
+          div.menu-link-only(itemprop='menus', itemscope, itemtype='WebsiteMenu')
+            a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
+              span(itemprop='name')=menu.name
 
   if item.menuCollections[0]
     div.center.primary(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
@@ -47,5 +48,6 @@ header-menu-simple.simple-menus(itemscope, itemtype='WebsiteHeader')
                         if link.description
                           .menu-link-description(itemprop='description')=link.description
         else
-          a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
-            span(itemprop='name')=menu.name
+          div.menu-link-only(itemprop='menus', itemscope, itemtype='WebsiteMenu')
+            a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
+              span(itemprop='name')=menu.name

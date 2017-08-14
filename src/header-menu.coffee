@@ -4,8 +4,8 @@ $ ()->
   $window = $(window)
   $window.on 'DOMContentLoaded scroll', (e)->
     if $window.scrollTop() > 10
-      $('header').first().addClass('darken')
+      $('header').first().addClass('undocked').removeClass('docked')
     else
-      $('header').first().removeClass('darken')
+      $('header').first().removeClass('undocked').addClass('docked')
 
 

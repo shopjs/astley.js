@@ -1,2 +1,29 @@
-small.copyright #{site.copyright}
+.footer-menu
+  each menuCollection in item.menuCollections
+    .menu-collection(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
+      each menu in menuCollection.menus
+        if menu.links
+          span.menu(tabindex=0, itemprop='menus', itemscope, itemtype='WebsiteMenu')
+            strong.menu-title=menu.name
+            .menu-body
+              .menu-content
+                each link in menu.links
+                  .menu-link(itemprop='links', itemscope, itemtype='WebsiteMenuLink')
+                    a.fade-on-hover(href=link.url, tabindex=0, itemprop='url')
+                      .menu-link-text
+                        .menu-link-name(itemprop='name')=link.name
+        else
+          a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
+            strong(itemprop='name')=menu.name
+
+.footer-small-print
+  .logos
+    each logo in item.logos
+      a.logo-link(href=logo.url, itemprop='logos', itemscope, itemtype='WebsiteLogo')
+        if logo.image
+          img.logo-image(src=logo.image, alt=logo.alt, itemprop='image')
+        if logo.name
+          span(itemprop='url')=logo.name
+
+  small.copyright #{site.copyright}
 

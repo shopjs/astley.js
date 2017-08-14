@@ -22,6 +22,9 @@ html(lang='en')
   body
     //(style='overflow:hidden')
     // Header
+
+    input#show-mobile-menu(type='checkbox')
+
     block preheader
     block header
       - {
@@ -39,8 +42,12 @@ html(lang='en')
             include hero.pug
         - }
 
-    footer
-      include footer.pug
+    block footer
+      - {
+      -   let item = data.footer || data.header
+          footer
+            include footer.pug
+      - }
 
     <!--[if IE]>
     .browserupgrade
