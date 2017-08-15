@@ -207,7 +207,7 @@ class Annotator extends El.View
         console.log('tag', node.tagName, topLevel)
 
       # label the links
-      $root.find('a').each (i, node) ->
+      $root.find('a[href]').each (i, node) ->
         $node = $(node)
         $node.attr('itemscope', '').attr('itemtype', 'WebsiteLink').attr('itemprop', 'url')
         $node.prepend('<meta itemprop="text" content="' + $node.text() + '"/>')
