@@ -1,6 +1,6 @@
 {
   "name": "astley.js",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Construct a website from a JSON-LD AST",
   "homepage": "https://github.com/hanzo-io/astley.js",
   "repository": "github.com/hanzo-io/astley.js",
