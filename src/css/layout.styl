@@ -29,12 +29,20 @@ main
 
 // Should Overwrite Others if available
 .flex-columns
+.columns
   display: box
   display: flexbox
   display: flex
   flex-direction: row
   justify-content: center
   align-items: center
+
+  &.flex-wrap
+  &.wrap
+    flex-wrap: wrap
+
+    & > *
+      flex: initial
 
   & > *
     flex: 1
