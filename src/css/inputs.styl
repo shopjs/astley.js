@@ -10,16 +10,22 @@ button
   text-decoration: none
   font-weight: 600
   white-space: nowrap
+  position: relative
+  top: 0
+  cursor: pointer
 
   color: $textColor1
   background-color: $buttonColorNormal
   padding: .75rem 1.5rem
 
   box-shadow: 1px 2px 1px 0.5px $shadowColor1
-  transition: box-shadow ($transitionTime * .5) linear
+  transition: all ($transitionTime * .5) linear
 
   &:hover
+  &:focus
     box-shadow: 2px 4px 2px .5px $shadowColor2
+    filter: brightness(115%)
+    top: -2px
 
   &.important
     background-color: $buttonColorImportant

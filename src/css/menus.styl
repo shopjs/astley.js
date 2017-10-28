@@ -310,8 +310,9 @@ footer
     align-items: flex-start
 
     & > *
-      flex: 1
-      color: $textColor2
+      margin: $spacing * 2
+      margin-top: 0
+      margin-right: auto
 
       a
         text-decoration: none
@@ -320,12 +321,14 @@ footer
         display: inline-block
         width: 100%
 
-    +below($phoneWidth)
-      flex-direction: column
-
+    +above($phoneWidth)
       & > *
-        width: 100%
-        text-align: center
-        margin-bottom: $spacing * 2
+        flex: 1
+        color: $textColor2
+
+    +below($phoneWidth)
+      flex-wrap: wrap
+      & > *
+        flex: initial
 
 // END Footer Menus
