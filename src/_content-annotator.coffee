@@ -223,6 +223,9 @@ class Annotator extends El.View
         text = node.nodeValue
 
         $p = $(p)
+        if $p.closest('[data-analytics-ignore]')[0]
+          continue
+
         $node = $(node)
 
         # add labeled links

@@ -8,11 +8,18 @@ import CTA from './cta'
 
 import HanzoAnalytics from 'hanzo-analytics'
 
-export default init = (orgId)->
+tagNames = [
+  HeaderMenuComplex::tag.toUpperCase()
+  HeaderMenuMobile::tag.toUpperCase()
+  HeaderMenuSimple::tag.toUpperCase()
+  Hero::tag.toUpperCase()
+  Block::tag.toUpperCase()
+]
+export default init = (orgId) ->
   HanzoAnalytics.orgId = orgId
-  HanzoAnalytics.onFocus = (record)->
+  HanzoAnalytics.onFocus = (record) ->
     console.log 'Record', record
   HanzoAnalytics.flushRate = 10000
 
-  El.mount '*'
+  El.mount tagNames.join ','
 
