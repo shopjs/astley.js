@@ -27,6 +27,10 @@ header-menu-simple.nav.simple-menus(itemscope, itemtype='WebsiteHeader')
                           .menu-link-description(itemprop='description')=link.description
         else
           div.menu-link-only(itemprop='menus', itemscope, itemtype='WebsiteMenu')
+          if menu.type == 'button'
+            a.button(href=menu.url, tabindex=0, itemprop='url')
+              span(itemprop='name')=menu.name
+          else
             a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
               span(itemprop='name')=menu.name
 
@@ -49,5 +53,9 @@ header-menu-simple.nav.simple-menus(itemscope, itemtype='WebsiteHeader')
                           .menu-link-description(itemprop='description')=link.description
         else
           div.menu-link-only(itemprop='menus', itemscope, itemtype='WebsiteMenu')
+          if menu.type == 'button'
+            a.button(href=menu.url, tabindex=0, itemprop='url')
+              span(itemprop='name')=menu.name
+          else
             a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
               span(itemprop='name')=menu.name

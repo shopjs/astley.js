@@ -33,7 +33,7 @@ class HeaderMenuComplex extends El.View
     @slideDirection = ''
 
     $el = $(e.target)
-    if !el[0]?
+    if !$el[0]?
       return
 
     first = @menuToShow == ''

@@ -103,6 +103,8 @@ of organizing related menus
   '@type': 'WebsiteMenu'
   # name - menu display name
   name: string
+  # description - link description
+  type: basic | button
   # url - menu may be a link itself (usually if no child links)
   url: string
   links: [ WebsiteMenuLink ]
@@ -122,6 +124,8 @@ WebsiteMenu is a menu which may be a link itself or a menu containing links
   name: string
   # description - link description
   description: string
+  # type - type of link supports specific types
+  type: basic | button
   # image - link image
   image: string
   # image - link url

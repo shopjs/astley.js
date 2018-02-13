@@ -20,7 +20,10 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
             onblur='{ hideMenu }')
             .menu-title.fade-on-hover=menu.name
         else
-          a.fade-on-hover(href=menu.url, tabindex=0)=menu.name
+          if menu.type == 'button'
+            a.button(href=menu.url, tabindex=0)=menu.name
+          else
+            a.fade-on-hover(href=menu.url, tabindex=0)=menu.name
 
   if item.menuCollections[0]
     div.center.primary
@@ -34,7 +37,10 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
             onblur='{ hideMenu }')
             .menu-title.fade-on-hover=menu.name
         else
-          a.fade-on-hover(href=menu.url, tabindex=0)=menu.name
+          if menu.type == 'button'
+            a.button(href=menu.url, tabindex=0)=menu.name
+          else
+            a.fade-on-hover(href=menu.url, tabindex=0)=menu.name
 
   .menu-wrapper(class='{ active: menuToShow }', onmouseleave ='{ hideMenu }')
     if item.menuCollections[0]

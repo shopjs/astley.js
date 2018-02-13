@@ -31,7 +31,9 @@ html(lang='en')
       - {
       -   let item = data.header
           header
+            block headercontentbefore
             include header.pug
+            block headercontentafter
       - }
 
     main
@@ -46,7 +48,9 @@ html(lang='en')
       - {
       -   let item = data.footer || data.header
           footer
+            block footercontentbefore
             include footer.pug
+            block footercontentafter
       - }
 
     <!--[if IE]>

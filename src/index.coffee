@@ -15,6 +15,7 @@ tagNames = [
   Hero::tag.toUpperCase()
   Block::tag.toUpperCase()
 ]
+
 export default init = (orgId) ->
   HanzoAnalytics.orgId = orgId
   HanzoAnalytics.onFocus = (record) ->

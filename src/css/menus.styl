@@ -170,10 +170,11 @@ header
       top: $spacing
       left: $spacing
       line-height: 2rem
+      z-index: 1
 
     .mobile-menu-content
       position: absolute
-      top: 0
+      top: -10px
       left: -1 * $mobileMenuWidth
       display: block
       width: $mobileMenuWidth
@@ -285,6 +286,16 @@ header
   // END Menu Link (Both Complex and Simple)
 
 // END Header Navigation Menus
+
+// START Header Button (Both Complex and Simple)
+  .simple-menus
+  .complex-menus
+    button
+    .button
+      margin-top: 5px
+
+// END Header Button (Both Complex and Simple)
+
 
 // START Mobile Menus Checked
 
