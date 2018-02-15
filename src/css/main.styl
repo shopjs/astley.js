@@ -2,9 +2,15 @@
   height: 105vh
   min-height: $sectionMinHeight
 
-  > *
-    +below($phoneWidth)
-      padding: 20vh 0
+  +below($tabletWidth)
+    height: auto
+
+  +below($phoneWidth)
+    padding-top: 10vh
+    padding-bottom: 10vh
+
+    > *
+      padding: 10vh 0
 
 .full
   min-height: $sectionMinHeight
