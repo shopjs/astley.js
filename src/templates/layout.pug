@@ -1,3 +1,5 @@
+block vars
+  - pageId = 'index'
 doctype html
 html(lang='en')
   head
@@ -19,8 +21,7 @@ html(lang='en')
     script(src='/js/polyfill/html5-shiv.js')
     <![endif]-->
 
-  body
-    block pageId
+  body(id=pageId)
     //(style='overflow:hidden')
     // Header
 
