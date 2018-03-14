@@ -5,3 +5,4 @@ npm-debug.log
 lib/
 .sake
 package-lock.json
+*.map

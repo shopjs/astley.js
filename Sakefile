@@ -22,6 +22,7 @@ task 'build:min', 'build js for production', ['build'], ->
     entry:     'src/index.coffee'
     format:    'web'
     external:  false
+    commonjs:  true
     sourceMap: false
     browser:   false
     compilers:
