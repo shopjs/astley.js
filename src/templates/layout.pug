@@ -8,7 +8,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
     meta(name='msapplication-tap-highlight' content='no')
 
-    include head.pug
+    include ./head.pug
 
     title
       block title
@@ -33,7 +33,7 @@ html(lang='en')
       -   let item = data.header
           header
             block headercontentbefore
-            include header.pug
+            include ./header.pug
             block headercontentafter
       - }
 
@@ -42,7 +42,7 @@ html(lang='en')
         - for(var i in data.main) {
           - let item = data.main[i]
           if i == 0
-            include hero.pug
+            include ./hero.pug
         - }
 
     block footer
@@ -50,7 +50,7 @@ html(lang='en')
       -   let item = data.footer || data.header
           footer
             block footercontentbefore
-            include footer.pug
+            include ./footer.pug
             block footercontentafter
       - }
 
