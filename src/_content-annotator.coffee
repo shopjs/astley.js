@@ -1,4 +1,5 @@
-import $ from './zepto'
+import $ from 'zepto-modules'
+import 'zepto-modules/selector'
 
 import HanzoAnalytics from 'hanzo-analytics'
 import { debounce } from './utils'
