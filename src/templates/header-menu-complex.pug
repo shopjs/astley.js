@@ -1,14 +1,15 @@
 header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
   meta(itemprop='type', content='complex')
-  div.left.logos
-    each logo in item.logos
-      a.logo-link(href=logo.url, itemprop='logos', itemscope, itemtype='WebsiteLogo')
-        if logo.image
-          img.logo-image(src=logo.image, alt=logo.alt, itemprop='image')
-        if logo.name
-          span(itemprop='url')=logo.name
+  if item.logos && item.logos[0]
+    div.left.logos
+      each logo in item.logos
+        a.logo-link(href=logo.url, itemprop='logos', itemscope, itemtype='WebsiteLogo')
+          if logo.image
+            img.logo-image(src=logo.image, alt=logo.alt, itemprop='image')
+          if logo.name
+            span(itemprop='url')=logo.name
 
-  if item.menuCollections[1]
+  if item.menuCollections && item.menuCollections[1]
     div.right.secondary
       each menu in item.menuCollections[1].menus
         if menu.links
@@ -25,7 +26,7 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
           else
             a.fade-on-hover(href=menu.url, tabindex=0)=menu.name
 
-  if item.menuCollections[0]
+  if item.menuCollections && item.menuCollections[0]
     div.center.primary
       each menu in item.menuCollections[0].menus
         if menu.links
@@ -43,7 +44,7 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
             a.fade-on-hover(href=menu.url, tabindex=0)=menu.name
 
   .menu-wrapper(class='{ active: menuToShow }', onmouseleave ='{ hideMenu }')
-    if item.menuCollections[0]
+    if item.menuCollections && item.menuCollections[0]
       .menu-bodies(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
         each menu in item.menuCollections[0].menus
           if menu.links
@@ -63,7 +64,7 @@ header-menu-complex.nav.complex-menus(itemscope, itemtype='WebsiteHeader')
               meta(itemprop='url', content=menu.url)
               meta(itemprop='name', content=menu.name)
 
-    if item.menuCollections[1]
+    if item.menuCollections && item.menuCollections[1]
       .menu-bodies(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
         each menu in item.menuCollections[1].menus
           if menu.links

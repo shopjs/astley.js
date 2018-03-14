@@ -1,11 +1,7 @@
 import Annotator from './_content-annotator'
 
 class Block extends Annotator
-  tag: 'block'
-
-  init: ()->
+  constructor: ()->
     super
-
-Block.register()
 
 export default Block

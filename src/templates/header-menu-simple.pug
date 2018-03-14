@@ -8,7 +8,7 @@ header-menu-simple.nav.simple-menus(itemscope, itemtype='WebsiteHeader')
         if logo.name
           span(itemprop='url')=logo.name
 
-  if item.menuCollections[1]
+  if item.menuCollections && item.menuCollections[1]
     div.right.secondary(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
       each menu in item.menuCollections[1].menus
         if menu.links
@@ -34,7 +34,7 @@ header-menu-simple.nav.simple-menus(itemscope, itemtype='WebsiteHeader')
             a.fade-on-hover(href=menu.url, tabindex=0, itemprop='url')
               span(itemprop='name')=menu.name
 
-  if item.menuCollections[0]
+  if item.menuCollections && item.menuCollections[0]
     div.center.primary(itemprop='menuCollections', itemscope, itemtype='WebsiteMenuCollection')
       each menu in item.menuCollections[0].menus
         if menu.links

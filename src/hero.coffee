@@ -1,11 +1,7 @@
 import Annotator from './_content-annotator'
 
 class Hero extends Annotator
-  tag: 'hero'
-
-  init: ()->
+  constructor: ()->
     super
-
-Hero.register()
 
 export default Hero

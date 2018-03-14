@@ -1,4 +1,7 @@
+import $ from './zepto'
+
 import El from 'el.js'
+
 import HeaderMenuComplex from './header-menu-complex'
 import HeaderMenuMobile from './header-menu-mobile'
 import HeaderMenuSimple from './header-menu-simple'
@@ -12,15 +15,18 @@ tagNames = [
   HeaderMenuComplex::tag.toUpperCase()
   HeaderMenuMobile::tag.toUpperCase()
   HeaderMenuSimple::tag.toUpperCase()
-  Hero::tag.toUpperCase()
-  Block::tag.toUpperCase()
 ]
 
-export default init = (orgId) ->
+export default start = (orgId) ->
   HanzoAnalytics.orgId = orgId
   HanzoAnalytics.onFocus = (record) ->
     console.log 'Record', record
   HanzoAnalytics.flushRate = 10000
 
-  El.mount tagNames.join ','
+  $('hero, .hero').each (i, el) ->
+    new Hero(el)
 
+  $('block, .block').each (i, el) ->
+    new Block(el)
+
+  El.mount tagNames.join ','

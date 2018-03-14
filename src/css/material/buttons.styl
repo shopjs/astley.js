@@ -1,0 +1,27 @@
+.m-button
+  mShadowed 1 $mDropShadowColor
+
+  outline: none
+  border: 0
+  border-radius: $mBorderRadius
+  height:        $mButtonHeight
+  line-height:   $mButtonHeight
+  font-size:     $mButtonFontSize
+  text-decoration: none
+  font-weight: 600
+  white-space: nowrap
+  position: relative
+  top: 0
+  cursor: pointer
+
+  color: $mButtonTextColor
+  background-color: $mButtonBGColor
+  padding: $mButtonPadding
+
+  transition: all ($mTransitionTime * .5) linear
+
+  &:hover
+  &:focus
+    mShadowed 2 $mDropShadowHoverColor
+    filter: brightness($mHoverBrightness)
+    top: $mButtonHoverOffset
