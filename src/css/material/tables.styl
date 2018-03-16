@@ -1,0 +1,46 @@
+.m-table.m-table
+  display: box
+  display: flexbox
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  text-align: center
+  margin: 0
+
+  & > *
+    padding $mSpacing * 2
+    width: 100%
+
+  .m-table-header
+    display: box
+    display: flexbox
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: $mSpacing * 1.5rem
+
+  .m-table-row
+  .m-table-row-header
+    text-align: left
+    display: box
+    display: flexbox
+    display: flex
+    flex-direction: row
+    padding: $mSpacing $mSpacing * 1.5 $mSpacing $mSpacing
+    align-items: center
+
+    border-bottom: 1px solid $mDividerColor
+
+    & > *
+      flex: 1
+      margin-right: $mSpacing * 1.5
+      overflow: auto;
+
+      &:last-child
+        margin-right: 0
+
+    &:last-child
+      border-bottom: 0
+
+  .m-table-row-header
+    padding: $mSpacing * 1.25 $mSpacing * 1.5 $mSpacing * 1.25 $mSpacing

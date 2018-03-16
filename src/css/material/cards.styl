@@ -1,5 +1,6 @@
 .m-card
-  mShadowed(2.5, $mDropShadowCardColor)
+  mShadowed(1.5, $mDropShadowCardColor)
+  background-color: $white
 
   padding: 0
 
@@ -27,6 +28,9 @@
     & > *
       margin-right: $mSpacing
 
+      &:last-child
+        margin-right: 0
+
   .m-card-body
     margin: $mSpacing
 
@@ -41,3 +45,6 @@
 
     & > *
       margin-right: $mSpacing
+
+      &:last-child
+        margin-right: 0
