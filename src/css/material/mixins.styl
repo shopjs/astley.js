@@ -1,2 +1,89 @@
-mShadowed(scale = 1, color = $mDropShadowColor)
-  box-shadow: ($mDropShadowH * scale) ($mDropShadowV * scale) ($mDropShadowBlur * scale) $mDropShadowSpread color
+@import './default-settings'
+
+mShadowed($scale = 1, $color = $mDropShadowColor)
+  box-shadow: ($mDropShadowH * $scale) ($mDropShadowV * $scale) ($mDropShadowBlur * $scale) $mDropShadowSpread $color
+
+mButton($color = $mButtonTextColor, $bgColor = $mButtonBGColor)
+  mShadowed 1 $mDropShadowColor
+  display: inline-block
+
+  outline: none
+  border: 0
+  border-radius: $mBorderRadius
+  height:        $mButtonHeight
+  line-height:   $mButtonHeight
+  font-size:     $mButtonFontSize
+  text-decoration: none
+  font-weight: 600
+  white-space: nowrap
+  position: relative
+  top: 0
+  cursor: pointer
+
+  color: color
+  background-color: bgColor
+  padding: $mButtonPadding
+
+  transition: all ($mTransitionTime * .5) linear
+
+  &:not(:disabled):not(.disabled)
+    &:hover
+    &:focus
+      mShadowed 2 $mDropShadowHoverColor
+      filter: brightness($mHoverBrightness)
+      top: $mButtonHoverOffset
+
+  &:disabled
+  .disabled
+    opacity: .5
+
+mCard($headerClass, $bodyClass, $footerClass)
+  mShadowed(1.5, $mDropShadowCardColor)
+  background-color: $white
+  display: table
+  width: 100%
+
+  padding: 0
+
+  border-radius: $mBorderRadius
+  overflow: hidden
+
+  & > *
+    width: 100%
+
+  .{$headerClass}
+    display: flex
+    flex-direction: row
+    align-items: center
+    background-color: $mPrimaryColor
+    color: $white
+    padding: $mSpacing * 1.5 $mSpacing $mSpacing
+
+    & > *
+      margin-right: $mSpacing
+
+      &:last-child
+        margin-right: 0
+
+  .{$bodyClass}
+    margin: $mSpacing
+    display: table
+    width: 100%
+
+  .{$footerClass}
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0 $mSpacing $mSpacing * 1.5
+    color: $mPrimaryColor
+
+    & > *
+      margin: $mSpacing * .5
+      flex: 1
+
+      &:first-child
+        margin-left: 0
+
+      &:last-child
+        margin-right: 0
+
