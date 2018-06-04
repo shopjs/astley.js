@@ -7,6 +7,9 @@ class HeaderMenuSimple extends El.View
   tag: 'header-menu-simple'
   html: '<yield/>'
 
+  init: ->
+    super arguments...
+
 HeaderMenuSimple.register()
 
 export default HeaderMenuSimple

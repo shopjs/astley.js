@@ -1,7 +1,7 @@
 import Annotator from './_content-annotator'
 
 class CTA extends Annotator
-  constructor: ()->
-    super
+  constructor: ->
+    super arguments...
 
 export default CTA

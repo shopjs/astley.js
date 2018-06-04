@@ -7,6 +7,9 @@ class HeaderMenuMobile extends El.View
   tag: 'header-menu-mobile'
   html: '<yield/>'
 
+  init: ->
+    super arguments...
+
 HeaderMenuMobile.register()
 
 export default HeaderMenuMobile

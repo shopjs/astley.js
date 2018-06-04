@@ -30,6 +30,7 @@
     "test": "sake test"
   },
   "dependencies": {
+    "akasha": "0.1.10",
     "el.js": "2.1.32",
     "es-raf": "^3.3.1",
     "hanzo-analytics": "^1.0.13",

@@ -14,8 +14,8 @@ class HeaderMenuComplex extends El.View
   # Direction to animate slide from
   slideDirection: ''
 
-  init: ()->
-    super
+  init: ->
+    super arguments...
 
     hideMenu = @hideMenu.bind @
 

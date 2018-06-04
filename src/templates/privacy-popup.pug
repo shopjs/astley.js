@@ -1,0 +1,7 @@
+if legal && legal.cookies
+  .cookies-content(class='{ unaccepted: !accepted() }')
+    .cookies-message
+      .cookies-title=legal.cookies.title
+      .cookies-description
+        | !{legal.cookies.description}
+    button.cookies-button(onclick='{ accept }')=legal.cookies.button

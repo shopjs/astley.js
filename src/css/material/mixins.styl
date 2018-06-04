@@ -1,4 +1,4 @@
-@import './default-settings'
+@require './default-settings'
 
 mShadowed($scale = 1, $color = $mDropShadowColor)
   box-shadow: ($mDropShadowH * $scale) ($mDropShadowV * $scale) ($mDropShadowBlur * $scale) $mDropShadowSpread $color
@@ -20,8 +20,8 @@ mButton($color = $mButtonTextColor, $bgColor = $mButtonBGColor)
   top: 0
   cursor: pointer
 
-  color: color
-  background-color: bgColor
+  color: $color
+  background-color: $bgColor
   padding: $mButtonPadding
 
   transition: all ($mTransitionTime * .5) linear
@@ -87,3 +87,13 @@ mCard($headerClass, $bodyClass, $footerClass)
       &:last-child
         margin-right: 0
 
+mLink($color = $mSecondaryColor, $visitedColor = $mSecondaryColor)
+  color: $color
+  text-decoration: none
+
+  // only works for anchor tags
+  &:visited
+    color: $visitedColor
+
+  &:hover
+    text-decoration: underline

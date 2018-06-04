@@ -30,7 +30,7 @@ html(lang='en')
     block preheader
     block header
       - {
-      -   let item = data.header
+      -   let item = data.header || {}
           header
             block headercontentbefore
             include ./header.pug
@@ -53,6 +53,12 @@ html(lang='en')
             include ./footer.pug
             block footercontentafter
       - }
+
+    block privacypopup
+      privacy-popup
+        block privacypopupcontentbefore
+        include ./privacy-popup.pug
+        block privacypopupcontentafter
 
     <!--[if IE]>
     .browserupgrade
