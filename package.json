@@ -15,7 +15,7 @@
     "hanzo"
   ],
   "main": "lib/astley.js",
-  "module": "lib/astley.mjs",
+  "module": "lib/astley.es.js",
   "files": [
     "lib/",
     "src/"
