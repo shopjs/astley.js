@@ -621,7 +621,8 @@ var Zepto = (function() {
     },
     toggle: function(setting){
       return this.each(function(){
-        var el = $(this);(setting === undefined ? el.css("display") == "none" : setting) ? el.show() : el.hide();
+        var el = $(this)
+        ;(setting === undefined ? el.css("display") == "none" : setting) ? el.show() : el.hide();
       })
     },
     prev: function(selector){ return $(this.pluck('previousElementSibling')).filter(selector || '*') },
@@ -942,13 +943,6 @@ var zepto = Zepto;
 
 //  commonjs-proxy:/Users/dtai/work/hanzo/astley.js/node_modules/zepto-modules/zepto.js
 
-// node_modules/zepto-modules/event.js
-//     Zepto.js
-//     (c) 2010-2016 Thomas Fuchs
-//     Zepto.js may be freely distributed under the MIT license.
-
-
-
 (function($){
   var _zid = 1, undefined,
       slice = Array.prototype.slice,
@@ -1024,7 +1018,8 @@ var zepto = Zepto;
     });
   }
   function remove(element, events, fn, selector, capture){
-    var id = zid(element);(events || '').split(/\s/).forEach(function(event){
+    var id = zid(element)
+    ;(events || '').split(/\s/).forEach(function(event){
       findHandlers(element, event, fn, selector).forEach(function(handler){
         delete handlers[id][handler.i];
       if ('removeEventListener' in element)
@@ -1221,13 +1216,6 @@ var zepto = Zepto;
   };
 
 })(zepto);
-
-// node_modules/zepto-modules/ajax.js
-//     Zepto.js
-//     (c) 2010-2016 Thomas Fuchs
-//     Zepto.js may be freely distributed under the MIT license.
-
-
 
 (function($){
   var jsonpID = +new Date(),
@@ -1609,13 +1597,6 @@ var zepto = Zepto;
   };
 })(zepto);
 
-// node_modules/zepto-modules/form.js
-//     Zepto.js
-//     (c) 2010-2016 Thomas Fuchs
-//     Zepto.js may be freely distributed under the MIT license.
-
-
-
 (function($){
   $.fn.serializeArray = function() {
     var name, type, result = [],
@@ -1654,10 +1635,6 @@ var zepto = Zepto;
 })(zepto);
 
 // node_modules/zepto-modules/ie.js
-//     Zepto.js
-//     (c) 2010-2016 Thomas Fuchs
-//     Zepto.js may be freely distributed under the MIT license.
-
 (function(){
   // getComputedStyle shouldn't freak out when called
   // without a valid element as argument
@@ -1693,15 +1670,8 @@ var zepto = Zepto;
 
 var _default = zepto;
 
-// node_modules/zepto-modules/selector.js
-//     Zepto.js
-//     (c) 2010-2016 Thomas Fuchs
-//     Zepto.js may be freely distributed under the MIT license.
-
-
-
 (function($){
-  var zepto$$2 = $.zepto, oldQsa = zepto$$2.qsa, oldMatches = zepto$$2.matches;
+  var zepto$$1 = $.zepto, oldQsa = zepto$$1.qsa, oldMatches = zepto$$1.matches;
 
   function visible(elem){
     elem = $(elem);
@@ -1729,7 +1699,7 @@ var _default = zepto;
     last:     function(idx, nodes){ if (idx === nodes.length - 1) return this },
     eq:       function(idx, _, value){ if (idx === value) return this },
     contains: function(idx, _, text){ if ($(this).text().indexOf(text) > -1) return this },
-    has:      function(idx, _, sel){ if (zepto$$2.qsa(this, sel).length) return this }
+    has:      function(idx, _, sel){ if (zepto$$1.qsa(this, sel).length) return this }
   };
 
   var filterRe = new RegExp('(.*):(\\w+)(?:\\(([^)]+)\\))?$\\s*'),
@@ -1752,7 +1722,7 @@ var _default = zepto;
     return fn(sel, filter, arg)
   }
 
-  zepto$$2.qsa = function(node, selector) {
+  zepto$$1.qsa = function(node, selector) {
     return process(selector, function(sel, filter, arg){
       try {
         var taggedParent;
@@ -1770,11 +1740,11 @@ var _default = zepto;
         if (taggedParent) taggedParent.removeClass(classTag);
       }
       return !filter ? nodes :
-        zepto$$2.uniq($.map(nodes, function(n, i){ return filter.call(n, i, nodes, arg) }))
+        zepto$$1.uniq($.map(nodes, function(n, i){ return filter.call(n, i, nodes, arg) }))
     })
   };
 
-  zepto$$2.matches = function(node, selector){
+  zepto$$1.matches = function(node, selector){
     return process(selector, function(sel, filter, arg){
       return (!sel || oldMatches(node, sel)) &&
         (!filter || filter.call(node, null, arg) === node)
@@ -1803,40 +1773,68 @@ var isFunction$1 = isFunction = function(value) {
 };
 
 // node_modules/riot/lib/browser/common/global-variables.js
-const __TAGS_CACHE = [];
-const __TAG_IMPL = {};
-const YIELD_TAG = 'yield';
-const GLOBAL_MIXIN = '__global_mixin';
-const ATTRS_PREFIX = 'riot-';
-const REF_DIRECTIVES = ['ref', 'data-ref'];
-const IS_DIRECTIVE = 'data-is';
-const CONDITIONAL_DIRECTIVE = 'if';
-const LOOP_DIRECTIVE = 'each';
-const LOOP_NO_REORDER_DIRECTIVE = 'no-reorder';
-const SHOW_DIRECTIVE = 'show';
-const HIDE_DIRECTIVE = 'hide';
-const KEY_DIRECTIVE = 'key';
-const RIOT_EVENTS_KEY = '__riot-events__';
-const T_STRING = 'string';
-const T_OBJECT = 'object';
-const T_UNDEF  = 'undefined';
-const T_FUNCTION = 'function';
-const XLINK_NS = 'http://www.w3.org/1999/xlink';
-const SVG_NS = 'http://www.w3.org/2000/svg';
-const XLINK_REGEX = /^xlink:(\w+)/;
-const WIN = typeof window === T_UNDEF ? undefined : window;
-const RE_SPECIAL_TAGS = /^(?:t(?:body|head|foot|[rhd])|caption|col(?:group)?|opt(?:ion|group))$/;
-const RE_SPECIAL_TAGS_NO_OPTION = /^(?:t(?:body|head|foot|[rhd])|caption|col(?:group)?)$/;
-const RE_EVENTS_PREFIX = /^on/;
-const RE_HTML_ATTRS = /([-\w]+) ?= ?(?:"([^"]*)|'([^']*)|({[^}]*}))/g;
-const CASE_SENSITIVE_ATTRIBUTES = {
+const
+  // be aware, internal usage
+  // ATTENTION: prefix the global dynamic variables with `__`
+  // tags instances cache
+  __TAGS_CACHE = [],
+  // tags implementation cache
+  __TAG_IMPL = {},
+  YIELD_TAG = 'yield',
+
+  /**
+   * Const
+   */
+  GLOBAL_MIXIN = '__global_mixin',
+
+  // riot specific prefixes or attributes
+  ATTRS_PREFIX = 'riot-',
+
+  // Riot Directives
+  REF_DIRECTIVES = ['ref', 'data-ref'],
+  IS_DIRECTIVE = 'data-is',
+  CONDITIONAL_DIRECTIVE = 'if',
+  LOOP_DIRECTIVE = 'each',
+  LOOP_NO_REORDER_DIRECTIVE = 'no-reorder',
+  SHOW_DIRECTIVE = 'show',
+  HIDE_DIRECTIVE = 'hide',
+  KEY_DIRECTIVE = 'key',
+  RIOT_EVENTS_KEY = '__riot-events__',
+
+  // for typeof == '' comparisons
+  T_STRING = 'string',
+  T_OBJECT = 'object',
+  T_UNDEF  = 'undefined',
+  T_FUNCTION = 'function',
+
+  XLINK_NS = 'http://www.w3.org/1999/xlink',
+  SVG_NS = 'http://www.w3.org/2000/svg',
+  XLINK_REGEX = /^xlink:(\w+)/,
+
+  WIN = typeof window === T_UNDEF ? undefined : window,
+
+  // special native tags that cannot be treated like the others
+  RE_SPECIAL_TAGS = /^(?:t(?:body|head|foot|[rhd])|caption|col(?:group)?|opt(?:ion|group))$/,
+  RE_SPECIAL_TAGS_NO_OPTION = /^(?:t(?:body|head|foot|[rhd])|caption|col(?:group)?)$/,
+  RE_EVENTS_PREFIX = /^on/,
+  RE_HTML_ATTRS = /([-\w]+) ?= ?(?:"([^"]*)|'([^']*)|({[^}]*}))/g,
+  // some DOM attributes must be normalized
+  CASE_SENSITIVE_ATTRIBUTES = {
     'viewbox': 'viewBox',
     'preserveaspectratio': 'preserveAspectRatio'
-  };
-const RE_BOOL_ATTRS = /^(?:disabled|checked|readonly|required|allowfullscreen|auto(?:focus|play)|compact|controls|default|formnovalidate|hidden|ismap|itemscope|loop|multiple|muted|no(?:resize|shade|validate|wrap)?|open|reversed|seamless|selected|sortable|truespeed|typemustmatch)$/;
-const IE_VERSION = (WIN && WIN.document || {}).documentMode | 0;
+  },
+  /**
+   * Matches boolean HTML attributes in the riot tag definition.
+   * With a long list like this, a regex is faster than `[].indexOf` in most browsers.
+   * @const {RegExp}
+   * @see [attributes.md](https://github.com/riot/compiler/blob/dev/doc/attributes.md)
+   */
+  RE_BOOL_ATTRS = /^(?:disabled|checked|readonly|required|allowfullscreen|auto(?:focus|play)|compact|controls|default|formnovalidate|hidden|ismap|itemscope|loop|multiple|muted|no(?:resize|shade|validate|wrap)?|open|reversed|seamless|selected|sortable|truespeed|typemustmatch)$/,
+  // version# for IE 8-11, 0 for others
+  IE_VERSION = (WIN && WIN.document || {}).documentMode | 0;
 
 // node_modules/riot/lib/browser/common/util/dom.js
+
 /**
  * Shorter and fast way to select multiple nodes in the DOM
  * @param   { String } selector - DOM selector
@@ -1853,7 +1851,7 @@ function $$(selector, ctx) {
  * @param   { Object } ctx - DOM node where the target of our search will is located
  * @returns { Object } dom node found
  */
-function $$2(selector, ctx) {
+function $(selector, ctx) {
   return (ctx || document).querySelector(selector)
 }
 
@@ -2019,7 +2017,7 @@ function walkNodes(dom, fn, context) {
 
 var dom = Object.freeze({
 	$$: $$,
-	$: $$2,
+	$: $,
 	createFrag: createFrag,
 	createDOMPlaceholder: createDOMPlaceholder,
 	isSvg: isSvg,
@@ -2036,6 +2034,7 @@ var dom = Object.freeze({
 });
 
 // node_modules/riot/lib/browser/tag/styleManager.js
+
 let styleNode;
 // Create cache and shortcut to the correct property
 let cssTextProp;
@@ -2049,7 +2048,7 @@ if (WIN) {
     // create a new style element with the correct type
     const newNode = mkEl('style');
     // replace any user node or insert the new one into the head
-    const userNode = $$2('style[type=riot]');
+    const userNode = $('style[type=riot]');
 
     setAttr(newNode, 'type', 'text/css');
     /* istanbul ignore next */
@@ -2632,7 +2631,7 @@ var tmpl = (function () {
 })();
 
 // node_modules/riot-observable/dist/es6.observable.js
-var observable$1 = function(el) {
+var observable = function(el) {
 
   /**
    * Extend the original object or create a new empty one
@@ -2757,6 +2756,7 @@ var observable$1 = function(el) {
 };
 
 // node_modules/riot/lib/browser/common/util/check.js
+
 /**
  * Check if the passed argument is a boolean attribute
  * @param   { String } value -
@@ -2855,6 +2855,7 @@ var check = Object.freeze({
 });
 
 // node_modules/riot/lib/browser/common/util/misc.js
+
 /**
  * Specialized function for looping an array-like collection with `each={}`
  * @param   { Array } list - collection of items
@@ -2906,7 +2907,7 @@ function startsWith(str, value) {
  * @returns { Object } - the initial object
  */
 function defineProperty(el, key, value, options) {
-  Object.defineProperty(el, key, extend$1$1({
+  Object.defineProperty(el, key, extend({
     value,
     enumerable: false,
     writable: false,
@@ -2939,7 +2940,7 @@ const getPropDescriptor = (o, k) => Object.getOwnPropertyDescriptor(o, k);
  * console.log(obj) => {bar: 'bar', foo: 'bar'}
  *
  */
-function extend$1$1(src) {
+function extend(src) {
   let obj;
   let i = 1;
   const args = arguments;
@@ -2965,17 +2966,19 @@ var misc = Object.freeze({
 	defineProperty: defineProperty,
 	uid: uid,
 	getPropDescriptor: getPropDescriptor,
-	extend: extend$1$1
+	extend: extend
 });
 
 // node_modules/riot/lib/settings.js
-var settings$1 = extend$1$1(Object.create(brackets.settings), {
+
+var settings = extend(Object.create(brackets.settings), {
   skipAnonymousTags: true,
   // handle the auto updates on any DOM event
   autoUpdate: true
 })
 
 // node_modules/riot/lib/browser/tag/setEventHandler.js
+
 /**
  * Trigger DOM events
  * @param   { HTMLElement } dom - dom element target of the event
@@ -3005,7 +3008,7 @@ function handleEvent(dom, handler, e) {
   handler.call(this, e);
 
   // avoid auto updates
-  if (!settings$1.autoUpdate) return
+  if (!settings.autoUpdate) return
 
   if (!e.preventUpdate) {
     const p = getImmediateCustomParentTag(this);
@@ -3042,6 +3045,7 @@ function setEventHandler(name, handler, dom, tag) {
 }
 
 // node_modules/riot/lib/browser/tag/update.js
+
 /**
  * Update dynamically created data-is tags with changing expressions
  * @param { Object } expr - expression tag and expression info
@@ -3248,6 +3252,7 @@ function updateAllExpressions(expressions) {
 }
 
 // node_modules/riot/lib/browser/tag/if.js
+
 var IfExpr = {
   init(dom, tag, expr) {
     remAttr(dom, CONDITIONAL_DIRECTIVE);
@@ -3288,6 +3293,7 @@ var IfExpr = {
 }
 
 // node_modules/riot/lib/browser/tag/ref.js
+
 var RefExpr = {
   init(dom, parent, attrName, attrValue) {
     this.dom = dom;
@@ -3338,6 +3344,7 @@ var RefExpr = {
 }
 
 // node_modules/riot/lib/browser/tag/each.js
+
 /**
  * Convert the item looped into an object used to extend the child tag properties
  * @param   { Object } expr - object containing the keys used to extend the children tags
@@ -3521,7 +3528,7 @@ function _each(dom, parent, expr) {
         if (expr.key && !isObject$$1)
           return !!tmpl(ifExpr, mkitem(expr, item, i, parent))
 
-        return !!tmpl(ifExpr, extend$1$1(Object.create(parent), item))
+        return !!tmpl(ifExpr, extend(Object.create(parent), item))
       });
     }
 
@@ -3608,6 +3615,7 @@ function _each(dom, parent, expr) {
 }
 
 // node_modules/riot/lib/browser/tag/parse.js
+
 /**
  * Walk the tag DOM to detect the expressions to evaluate
  * @this Tag
@@ -3735,20 +3743,22 @@ function parseAttributes(dom, attrs, fn) {
 }
 
 // node_modules/riot/lib/browser/tag/mkdom.js
+
 /*
   Includes hacks needed for the Internet Explorer version 9 and below
   See: http://kangax.github.io/compat-table/es5/#ie8
        http://codeplanet.io/dropping-ie8/
 */
 
-const reHasYield  = /<yield\b/i;
-const reYieldAll  = /<yield\s*(?:\/>|>([\S\s]*?)<\/yield\s*>|>)/ig;
-const reYieldSrc  = /<yield\s+to=['"]([^'">]*)['"]\s*>([\S\s]*?)<\/yield\s*>/ig;
-const reYieldDest = /<yield\s+from=['"]?([-\w]+)['"]?\s*(?:\/>|>([\S\s]*?)<\/yield\s*>)/ig;
-const rootEls = { tr: 'tbody', th: 'tr', td: 'tr', col: 'colgroup' };
-const tblTags = IE_VERSION && IE_VERSION < 10 ? RE_SPECIAL_TAGS : RE_SPECIAL_TAGS_NO_OPTION;
-const GENERIC = 'div';
-const SVG = 'svg';
+const
+  reHasYield  = /<yield\b/i,
+  reYieldAll  = /<yield\s*(?:\/>|>([\S\s]*?)<\/yield\s*>|>)/ig,
+  reYieldSrc  = /<yield\s+to=['"]([^'">]*)['"]\s*>([\S\s]*?)<\/yield\s*>/ig,
+  reYieldDest = /<yield\s+from=['"]?([-\w]+)['"]?\s*(?:\/>|>([\S\s]*?)<\/yield\s*>)/ig,
+  rootEls = { tr: 'tbody', th: 'tr', td: 'tr', col: 'colgroup' },
+  tblTags = IE_VERSION && IE_VERSION < 10 ? RE_SPECIAL_TAGS : RE_SPECIAL_TAGS_NO_OPTION,
+  GENERIC = 'div',
+  SVG = 'svg';
 
 
 /*
@@ -3774,7 +3784,7 @@ function specialTags(el, tmpl, tagName) {
   } else {
     // avoids insertion of cointainer inside container (ex: tbody inside tbody)
     const tname = rootEls[tagName];
-    if (tname && parent.childElementCount === 1) parent = $$2(tname, parent);
+    if (tname && parent.childElementCount === 1) parent = $(tname, parent);
   }
   return parent
 }
@@ -3832,18 +3842,19 @@ function mkdom(tmpl, html, isSvg$$1) {
 }
 
 // node_modules/riot/lib/browser/tag/core.js
+
 /**
  * Another way to create a riot tag a bit more es6 friendly
  * @param { HTMLElement } el - tag DOM selector or DOM node/s
  * @param { Object } opts - tag logic
  * @returns { Tag } new riot tag instance
  */
-function Tag$1(el, opts) {
+function Tag(el, opts) {
   // get the tag properties from the class constructor
   const {name, tmpl, css, attrs, onCreate} = this;
   // register a new tag and cache the class prototype
   if (!__TAG_IMPL[name]) {
-    tag$1(name, tmpl, css, attrs, onCreate);
+    tag(name, tmpl, css, attrs, onCreate);
     // cache the class constructor
     __TAG_IMPL[name].class = this.constructor;
   }
@@ -3865,7 +3876,7 @@ function Tag$1(el, opts) {
  * @param   { Function } fn - user function
  * @returns { String } name/id of the tag just created
  */
-function tag$1(name, tmpl, css, attrs, fn) {
+function tag(name, tmpl, css, attrs, fn) {
   if (isFunction$2(attrs)) {
     fn = attrs;
 
@@ -3898,7 +3909,7 @@ function tag$1(name, tmpl, css, attrs, fn) {
  * @param   { Function } fn - user function
  * @returns { String } name/id of the tag just created
  */
-function tag2$1(name, tmpl, css, attrs, fn) {
+function tag2(name, tmpl, css, attrs, fn) {
   if (css) styleManager.add(css, name);
 
   __TAG_IMPL[name] = { name, tmpl, attrs, fn };
@@ -3913,7 +3924,7 @@ function tag2$1(name, tmpl, css, attrs, fn) {
  * @param   { Object } opts - tag logic
  * @returns { Array } new tags instances
  */
-function mount$1(selector, tagName, opts) {
+function mount(selector, tagName, opts) {
   const tags = [];
   let elem, allTags;
 
@@ -3996,10 +4007,10 @@ let mixins_id = 0;
  * @param   { Boolean } g - is global?
  * @returns { Object }  the mixin logic
  */
-function mixin$1(name, mix, g) {
+function mixin(name, mix, g) {
   // Unnamed global
   if (isObject(name)) {
-    mixin$1(`__${mixins_id++}__`, name, true);
+    mixin(`__${mixins_id++}__`, name, true);
     return
   }
 
@@ -4015,37 +4026,38 @@ function mixin$1(name, mix, g) {
 
   // Setter
   store[name] = isFunction$2(mix) ?
-    extend$1$1(mix.prototype, store[name] || {}) && mix :
-    extend$1$1(store[name] || {}, mix);
+    extend(mix.prototype, store[name] || {}) && mix :
+    extend(store[name] || {}, mix);
 }
 
 /**
  * Update all the tags instances created
  * @returns { Array } all the tags instances
  */
-function update$1() {
+function update() {
   return each(__TAGS_CACHE, tag => tag.update())
 }
 
-function unregister$1(name) {
+function unregister(name) {
   __TAG_IMPL[name] = null;
 }
 
-const version$1 = 'WIP';
+const version = 'WIP';
 
 
 var core = Object.freeze({
-	Tag: Tag$1,
-	tag: tag$1,
-	tag2: tag2$1,
-	mount: mount$1,
-	mixin: mixin$1,
-	update: update$1,
-	unregister: unregister$1,
-	version: version$1
+	Tag: Tag,
+	tag: tag,
+	tag2: tag2,
+	mount: mount,
+	mixin: mixin,
+	update: update,
+	unregister: unregister,
+	version: version
 });
 
 // node_modules/riot/lib/browser/tag/tag.js
+
 /**
  * We need to update opts for this tag. That requires updating the expressions
  * in any attributes on the tag, and then copying the result onto opts.
@@ -4099,12 +4111,12 @@ function setMountState(value) {
  * @param { String } innerHTML - html that eventually we need to inject in the tag
  */
 function createTag(impl = {}, conf = {}, innerHTML) {
-  const tag = conf.context || {};
-  const opts = extend$1$1({}, conf.opts);
+  const tag$$1 = conf.context || {};
+  const opts = extend({}, conf.opts);
   const parent = conf.parent;
   const isLoop = conf.isLoop;
   const isAnonymous = !!conf.isAnonymous;
-  const skipAnonymous = settings$1.skipAnonymousTags && isAnonymous;
+  const skipAnonymous = settings.skipAnonymousTags && isAnonymous;
   const item = conf.item;
   // available only for the looped nodes
   const index = conf.index;
@@ -4120,14 +4132,14 @@ function createTag(impl = {}, conf = {}, innerHTML) {
   let dom;
 
   // make this tag observable
-  if (!skipAnonymous) observable$1(tag);
+  if (!skipAnonymous) observable(tag$$1);
   // only call unmount if we have a valid __TAG_IMPL (has name property)
   if (impl.name && root._tag) root._tag.unmount(true);
 
   // not yet mounted
-  defineProperty(tag, 'isMounted', false);
+  defineProperty(tag$$1, 'isMounted', false);
 
-  defineProperty(tag, '__', {
+  defineProperty(tag$$1, '__', {
     isAnonymous,
     instAttrs,
     innerHTML,
@@ -4149,13 +4161,13 @@ function createTag(impl = {}, conf = {}, innerHTML) {
 
   // create a unique id to this tag
   // it could be handy to use it also to improve the virtual dom rendering speed
-  defineProperty(tag, '_riot_id', uid()); // base 1 allows test !t._riot_id
-  defineProperty(tag, 'root', root);
-  extend$1$1(tag, { opts }, item);
+  defineProperty(tag$$1, '_riot_id', uid()); // base 1 allows test !t._riot_id
+  defineProperty(tag$$1, 'root', root);
+  extend(tag$$1, { opts }, item);
   // protect the "tags" and "refs" property from being overridden
-  defineProperty(tag, 'parent', parent || null);
-  defineProperty(tag, 'tags', {});
-  defineProperty(tag, 'refs', {});
+  defineProperty(tag$$1, 'parent', parent || null);
+  defineProperty(tag$$1, 'tags', {});
+  defineProperty(tag$$1, 'refs', {});
 
   if (isInline || isLoop && isAnonymous) {
     dom = root;
@@ -4169,38 +4181,38 @@ function createTag(impl = {}, conf = {}, innerHTML) {
    * @param   { * }  data - data we want to use to extend the tag properties
    * @returns { Tag } the current tag instance
    */
-  defineProperty(tag, 'update', function tagUpdate(data) {
+  defineProperty(tag$$1, 'update', function tagUpdate(data) {
     const nextOpts = {};
-    const canTrigger = tag.isMounted && !skipAnonymous;
+    const canTrigger = tag$$1.isMounted && !skipAnonymous;
 
     // inherit properties from the parent tag
-    if (isAnonymous && parent) extend$1$1(tag, parent);
-    extend$1$1(tag, data);
+    if (isAnonymous && parent) extend(tag$$1, parent);
+    extend(tag$$1, data);
 
-    updateOpts.apply(tag, [isLoop, parent, isAnonymous, nextOpts, instAttrs]);
+    updateOpts.apply(tag$$1, [isLoop, parent, isAnonymous, nextOpts, instAttrs]);
 
     if (
       canTrigger &&
-      tag.isMounted &&
-      isFunction$2(tag.shouldUpdate) && !tag.shouldUpdate(data, nextOpts)
+      tag$$1.isMounted &&
+      isFunction$2(tag$$1.shouldUpdate) && !tag$$1.shouldUpdate(data, nextOpts)
     ) {
-      return tag
+      return tag$$1
     }
 
-    extend$1$1(opts, nextOpts);
+    extend(opts, nextOpts);
 
-    if (canTrigger) tag.trigger('update', data);
-    updateAllExpressions.call(tag, expressions);
-    if (canTrigger) tag.trigger('updated');
+    if (canTrigger) tag$$1.trigger('update', data);
+    updateAllExpressions.call(tag$$1, expressions);
+    if (canTrigger) tag$$1.trigger('updated');
 
-    return tag
+    return tag$$1
   });
 
   /**
    * Add a mixin to this tag
    * @returns { Tag } the current tag instance
    */
-  defineProperty(tag, 'mixin', function tagMixin() {
+  defineProperty(tag$$1, 'mixin', function tagMixin() {
     each(arguments, (mix) => {
       let instance;
       let obj;
@@ -4209,7 +4221,7 @@ function createTag(impl = {}, conf = {}, innerHTML) {
       // properties blacklisted and will not be bound to the tag instance
       const propsBlacklist = ['init', '__proto__'];
 
-      mix = isString(mix) ? mixin$1(mix) : mix;
+      mix = isString(mix) ? mixin(mix) : mix;
 
       // check if the mixin is a function
       if (isFunction$2(mix)) {
@@ -4233,11 +4245,11 @@ function createTag(impl = {}, conf = {}, innerHTML) {
           const hasGetterSetter = descriptor && (descriptor.get || descriptor.set);
 
           // apply method only if it does not already exist on the instance
-          if (!tag.hasOwnProperty(key) && hasGetterSetter) {
-            Object.defineProperty(tag, key, descriptor);
+          if (!tag$$1.hasOwnProperty(key) && hasGetterSetter) {
+            Object.defineProperty(tag$$1, key, descriptor);
           } else {
-            tag[key] = isFunction$2(instance[key]) ?
-              instance[key].bind(tag) :
+            tag$$1[key] = isFunction$2(instance[key]) ?
+              instance[key].bind(tag$$1) :
               instance[key];
           }
         }
@@ -4245,76 +4257,76 @@ function createTag(impl = {}, conf = {}, innerHTML) {
 
       // init method will be called automatically
       if (instance.init)
-        instance.init.bind(tag)(opts);
+        instance.init.bind(tag$$1)(opts);
     });
 
-    return tag
+    return tag$$1
   });
 
   /**
    * Mount the current tag instance
    * @returns { Tag } the current tag instance
    */
-  defineProperty(tag, 'mount', function tagMount() {
-    root._tag = tag; // keep a reference to the tag just created
+  defineProperty(tag$$1, 'mount', function tagMount() {
+    root._tag = tag$$1; // keep a reference to the tag just created
 
     // Read all the attrs on this instance. This give us the info we need for updateOpts
     parseAttributes.apply(parent, [root, root.attributes, (attr, expr) => {
-      if (!isAnonymous && RefExpr.isPrototypeOf(expr)) expr.tag = tag;
+      if (!isAnonymous && RefExpr.isPrototypeOf(expr)) expr.tag = tag$$1;
       attr.expr = expr;
       instAttrs.push(attr);
     }]);
 
     // update the root adding custom attributes coming from the compiler
     walkAttrs(impl.attrs, (k, v) => { implAttrs.push({name: k, value: v}); });
-    parseAttributes.apply(tag, [root, implAttrs, (attr, expr) => {
+    parseAttributes.apply(tag$$1, [root, implAttrs, (attr, expr) => {
       if (expr) expressions.push(expr);
       else setAttr(root, attr.name, attr.value);
     }]);
 
     // initialiation
-    updateOpts.apply(tag, [isLoop, parent, isAnonymous, opts, instAttrs]);
+    updateOpts.apply(tag$$1, [isLoop, parent, isAnonymous, opts, instAttrs]);
 
     // add global mixins
-    const globalMixin = mixin$1(GLOBAL_MIXIN);
+    const globalMixin = mixin(GLOBAL_MIXIN);
 
     if (globalMixin && !skipAnonymous) {
       for (const i in globalMixin) {
         if (globalMixin.hasOwnProperty(i)) {
-          tag.mixin(globalMixin[i]);
+          tag$$1.mixin(globalMixin[i]);
         }
       }
     }
 
-    if (impl.fn) impl.fn.call(tag, opts);
+    if (impl.fn) impl.fn.call(tag$$1, opts);
 
-    if (!skipAnonymous) tag.trigger('before-mount');
+    if (!skipAnonymous) tag$$1.trigger('before-mount');
 
     // parse layout after init. fn may calculate args for nested custom tags
-    each(parseExpressions.apply(tag, [dom, isAnonymous]), e => expressions.push(e));
+    each(parseExpressions.apply(tag$$1, [dom, isAnonymous]), e => expressions.push(e));
 
-    tag.update(item);
+    tag$$1.update(item);
 
     if (!isAnonymous && !isInline) {
       while (dom.firstChild) root.appendChild(dom.firstChild);
     }
 
-    defineProperty(tag, 'root', root);
+    defineProperty(tag$$1, 'root', root);
 
     // if we need to wait that the parent "mount" or "updated" event gets triggered
-    if (!skipAnonymous && tag.parent) {
-      const p = getImmediateCustomParentTag(tag.parent);
+    if (!skipAnonymous && tag$$1.parent) {
+      const p = getImmediateCustomParentTag(tag$$1.parent);
       p.one(!p.isMounted ? 'mount' : 'updated', () => {
-        setMountState.call(tag, true);
+        setMountState.call(tag$$1, true);
       });
     } else {
       // otherwise it's not a child tag we can trigger its mount event
-      setMountState.call(tag, true);
+      setMountState.call(tag$$1, true);
     }
 
-    tag.__.wasCreated = true;
+    tag$$1.__.wasCreated = true;
 
-    return tag
+    return tag$$1
 
   });
 
@@ -4323,12 +4335,12 @@ function createTag(impl = {}, conf = {}, innerHTML) {
    * @param { Boolean } mustKeepRoot - if it's true the root node will not be removed
    * @returns { Tag } the current tag instance
    */
-  defineProperty(tag, 'unmount', function tagUnmount(mustKeepRoot) {
-    const el = tag.root;
+  defineProperty(tag$$1, 'unmount', function tagUnmount(mustKeepRoot) {
+    const el = tag$$1.root;
     const p = el.parentNode;
-    const tagIndex = __TAGS_CACHE.indexOf(tag);
+    const tagIndex = __TAGS_CACHE.indexOf(tag$$1);
 
-    if (!skipAnonymous) tag.trigger('before-unmount');
+    if (!skipAnonymous) tag$$1.trigger('before-unmount');
 
     // clear all attributes coming from the mounted tag
     walkAttrs(impl.attrs, (name) => {
@@ -4339,7 +4351,7 @@ function createTag(impl = {}, conf = {}, innerHTML) {
     });
 
     // remove all the event listeners
-    tag.__.listeners.forEach((dom) => {
+    tag$$1.__.listeners.forEach((dom) => {
       Object.keys(dom[RIOT_EVENTS_KEY]).forEach((eventName) => {
         dom.removeEventListener(eventName, dom[RIOT_EVENTS_KEY][eventName]);
       });
@@ -4354,16 +4366,16 @@ function createTag(impl = {}, conf = {}, innerHTML) {
 
       if (isVirtual) {
         Object
-          .keys(tag.tags)
-          .forEach(tagName => arrayishRemove(ptag.tags, tagName, tag.tags[tagName]));
+          .keys(tag$$1.tags)
+          .forEach(tagName => arrayishRemove(ptag.tags, tagName, tag$$1.tags[tagName]));
       } else {
-        arrayishRemove(ptag.tags, tagName, tag);
+        arrayishRemove(ptag.tags, tagName, tag$$1);
       }
     }
 
     // unmount all the virtual directives
-    if (tag.__.virts) {
-      each(tag.__.virts, (v) => {
+    if (tag$$1.__.virts) {
+      each(tag$$1.__.virts, (v) => {
         if (v.parentNode) v.parentNode.removeChild(v);
       });
     }
@@ -4378,24 +4390,25 @@ function createTag(impl = {}, conf = {}, innerHTML) {
     else if (p) p.removeChild(el);
 
     // custom internal unmount function to avoid relying on the observable
-    if (tag.__.onUnmount) tag.__.onUnmount();
+    if (tag$$1.__.onUnmount) tag$$1.__.onUnmount();
 
     // weird fix for a weird edge case #2409 and #2436
     // some users might use your software not as you've expected
     // so I need to add these dirty hacks to mitigate unexpected issues
-    if (!tag.isMounted) setMountState.call(tag, true);
+    if (!tag$$1.isMounted) setMountState.call(tag$$1, true);
 
-    setMountState.call(tag, false);
+    setMountState.call(tag$$1, false);
 
-    delete tag.root._tag;
+    delete tag$$1.root._tag;
 
-    return tag
+    return tag$$1
   });
 
-  return tag
+  return tag$$1
 }
 
 // node_modules/riot/lib/browser/common/util/tags.js
+
 /**
  * Detect the tag implementation by a DOM node
  * @param   { Object } dom - DOM node we need to parse to get its tag implementation
@@ -4562,7 +4575,7 @@ function mountTo(root, tagName, opts, ctx) {
   const context = ctx || (implClass ? Object.create(implClass.prototype) : {});
   // cache the inner HTML to fix #855
   const innerHTML = root._innerHTML = root._innerHTML || root.innerHTML;
-  const conf = extend$1$1({ root, opts, context }, { parent: opts ? opts.parent : null });
+  const conf = extend({ root, opts, context }, { parent: opts ? opts.parent : null });
   let tag;
 
   if (impl && root) tag = createTag(impl, conf, innerHTML);
@@ -4626,7 +4639,7 @@ function makeVirtual(src, target) {
  * @param { Tag } - temporary tag context containing all the parent properties
  */
 function inheritParentProps() {
-  if (this.parent) return extend$1$1(Object.create(this), this.parent)
+  if (this.parent) return extend(Object.create(this), this.parent)
   return this
 }
 
@@ -4692,10 +4705,11 @@ var tags = Object.freeze({
 });
 
 // node_modules/riot/lib/riot.js
+
 /**
  * Riot public api
  */
-const settings = settings$1;
+const settings$1 = settings;
 const util = {
   tmpl,
   brackets,
@@ -4709,20 +4723,9 @@ const util = {
   tags
 };
 
-// export the core props/methods
-
-
-
-
-
-
-
-
-
-
-var riot$1 = extend$1$1({}, core, {
-  observable: observable$1,
-  settings,
+var riot$1 = extend({}, core, {
+  observable: observable,
+  settings: settings$1,
   util,
 })
 
@@ -4760,7 +4763,7 @@ toObject = function(val) {
 };
 
 shouldUseNative = function() {
-  var err, i, j, k, len, letter, order2, ref, test1, test2, test3;
+  var i, j, k, len, letter, order2, ref, test1, test2, test3;
   try {
     if (!Object.assign) {
       return false;
@@ -4795,7 +4798,7 @@ shouldUseNative = function() {
   }
 };
 
-var index$1 = objectAssign = (function() {
+var index = objectAssign = (function() {
   if (shouldUseNative()) {
     return Object.assign;
   }
@@ -4826,6 +4829,7 @@ var index$1 = objectAssign = (function() {
 })();
 
 // node_modules/referential/lib/referential.mjs
+
 // src/ref.coffee
 var Ref;
 var nextId;
@@ -4852,8 +4856,7 @@ var Ref$1 = Ref = (function() {
       this.parent._children[this._id] = this;
       this.parent._numChildren++;
     }
-    observable$1(this);
-    
+    observable(this);
   }
 
   Ref.prototype._mutate = function(key) {
@@ -4945,7 +4948,7 @@ var Ref$1 = Ref = (function() {
     this._mutate(key);
     if (value == null) {
       if (isObject$2(key)) {
-        this.value(index$1(this.value(), key));
+        this.value(index(this.value(), key));
       } else {
         this.index(key, value, false);
       }
@@ -5005,21 +5008,21 @@ var Ref$1 = Ref = (function() {
     var clone;
     this._mutate(key);
     if (value == null) {
-      this.value(index$1(this.value(), key));
+      this.value(index(this.value(), key));
     } else {
       if (isObject$2(value)) {
-        this.value(index$1((this.ref(key)).get(), value));
+        this.value(index((this.ref(key)).get(), value));
       } else {
         clone = this.clone();
         this.set(key, value);
-        this.value(index$1(clone.get(), this.value()));
+        this.value(index(clone.get(), this.value()));
       }
     }
     return this;
   };
 
   Ref.prototype.clone = function(key) {
-    return new Ref(index$1({}, this.get(key)));
+    return new Ref(index({}, this.get(key)));
   };
 
   Ref.prototype.index = function(key, value, get, obj) {
@@ -5498,16 +5501,15 @@ var browser = (function() {
   }
   return now;
 })();
-
 var frameDuration;
-var id$1;
+var id;
 var last;
 var queue;
 var requestAnimationFrame;
 
 frameDuration = 1000 / 60;
 
-id$1 = 0;
+id = 0;
 
 last = 0;
 
@@ -5539,16 +5541,17 @@ var raf = requestAnimationFrame = function(callback) {
     }, Math.round(next));
   }
   queue.push({
-    handle: ++id$1,
+    handle: ++id,
     callback: callback,
     cancelled: false
   });
-  return id$1;
+  return id;
 };
 
 // node_modules/el.js/lib/el.mjs
+
 // src/schedule.coffee
-var id;
+var id$1;
 var p;
 var rafId;
 var scheduleUpdate;
@@ -5560,9 +5563,9 @@ rafId = -1;
 
 p = null;
 
-id = 0;
+id$1 = 0;
 
-scheduleUpdate = function(tag$$1) {
+scheduleUpdate = function(tag) {
   var currentTag, parentTag;
   if (!p) {
     p = new Promise$2;
@@ -5580,24 +5583,24 @@ scheduleUpdate = function(tag$$1) {
   if (todos['*']) {
     return p;
   }
-  if (!tag$$1) {
+  if (!tag) {
     todos = {
       '*': riot$1
     };
-  } else if (tag$$1.update == null) {
+  } else if (tag.update == null) {
     throw new Error('tag has no update routine');
   } else {
-    currentTag = tag$$1;
+    currentTag = tag;
     while (currentTag != null) {
       parentTag = currentTag.parent;
       if (!currentTag._schedulingId) {
-        currentTag._schedulingId = id++;
+        currentTag._schedulingId = id$1++;
       } else if (todos[currentTag.schedulingId] != null) {
         return p;
       }
       currentTag = parentTag;
     }
-    todos[tag$$1._schedulingId] = tag$$1;
+    todos[tag._schedulingId] = tag;
   }
   if (rafId === -1) {
     rafId = raf(function() {
@@ -5645,7 +5648,7 @@ collapsePrototype = function(collapse, proto) {
   }
   parentProto = Object.getPrototypeOf(proto);
   collapsePrototype(collapse, parentProto);
-  return index$1(collapse, parentProto);
+  return index(collapse, parentProto);
 };
 
 View = (function() {
@@ -5804,7 +5807,7 @@ inputify = function(data, configs) {
       config: config,
       validate: validate
     };
-    observable$1(input);
+    observable(input);
     return inputs[name] = input;
   };
   for (name in configs) {
@@ -5818,11 +5821,11 @@ var inputify$1 = inputify;
 
 // src/views/form.coffee
 var Form;
-var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+var extend$1 = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 var hasProp = {}.hasOwnProperty;
 
 Form = (function(superClass) {
-  extend(Form, superClass);
+  extend$1(Form, superClass);
 
   function Form() {
     return Form.__super__.constructor.apply(this, arguments);
@@ -5882,11 +5885,11 @@ var Form$1 = Form;
 
 // src/views/input.coffee
 var Input;
-var extend$1 = function(child, parent) { for (var key in parent) { if (hasProp$1.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+var extend$1$1 = function(child, parent) { for (var key in parent) { if (hasProp$1.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 var hasProp$1 = {}.hasOwnProperty;
 
 Input = (function(superClass) {
-  extend$1(Input, superClass);
+  extend$1$1(Input, superClass);
 
   function Input() {
     return Input.__super__.constructor.apply(this, arguments);
@@ -5914,7 +5917,7 @@ Input = (function(superClass) {
           return Promise.resolve([ref, name]);
         }
       };
-      observable$1(this.input);
+      observable(this.input);
     }
     this.input.on('validate', (function(_this) {
       return function(pRef) {
@@ -6004,7 +6007,7 @@ var Views$1 = Views = {
 // src/index.coffee
 var El;
 var fn;
-var k;
+var k$1;
 var v;
 
 El = {
@@ -6026,14 +6029,15 @@ fn = function(k, v) {
     };
   }
 };
-for (k in riot$1) {
-  v = riot$1[k];
-  fn(k, v);
+for (k$1 in riot$1) {
+  v = riot$1[k$1];
+  fn(k$1, v);
 }
 
 var El$1 = El;
 
 // src/header-menu.coffee
+
 _default(function() {
   var $window;
   $window = _default(window);
@@ -6047,9 +6051,9 @@ _default(function() {
 });
 
 // src/header-menu-complex.coffee
-var HeaderMenuComplex;
-var extend$2 = function(child, parent) { for (var key in parent) { if (hasProp$1$1.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-var hasProp$1$1 = {}.hasOwnProperty;
+var HeaderMenuComplex,
+  extend$2 = function(child, parent) { for (var key in parent) { if (hasProp$2.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$2 = {}.hasOwnProperty;
 
 HeaderMenuComplex = (function(superClass) {
   extend$2(HeaderMenuComplex, superClass);
@@ -6142,9 +6146,9 @@ HeaderMenuComplex.register();
 var HeaderMenuComplex$1 = HeaderMenuComplex;
 
 // src/header-menu-mobile.coffee
-var HeaderMenuMobile;
-var extend$3 = function(child, parent) { for (var key in parent) { if (hasProp$2.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-var hasProp$2 = {}.hasOwnProperty;
+var HeaderMenuMobile,
+  extend$3 = function(child, parent) { for (var key in parent) { if (hasProp$3.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$3 = {}.hasOwnProperty;
 
 HeaderMenuMobile = (function(superClass) {
   extend$3(HeaderMenuMobile, superClass);
@@ -6157,6 +6161,10 @@ HeaderMenuMobile = (function(superClass) {
 
   HeaderMenuMobile.prototype.html = '<yield/>';
 
+  HeaderMenuMobile.prototype.init = function() {
+    return HeaderMenuMobile.__super__.init.apply(this, arguments);
+  };
+
   return HeaderMenuMobile;
 
 })(El$1.View);
@@ -6166,9 +6174,9 @@ HeaderMenuMobile.register();
 var HeaderMenuMobile$1 = HeaderMenuMobile;
 
 // src/header-menu-simple.coffee
-var HeaderMenuSimple;
-var extend$4 = function(child, parent) { for (var key in parent) { if (hasProp$3.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-var hasProp$3 = {}.hasOwnProperty;
+var HeaderMenuSimple,
+  extend$4 = function(child, parent) { for (var key in parent) { if (hasProp$4.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$4 = {}.hasOwnProperty;
 
 HeaderMenuSimple = (function(superClass) {
   extend$4(HeaderMenuSimple, superClass);
@@ -6181,6 +6189,10 @@ HeaderMenuSimple = (function(superClass) {
 
   HeaderMenuSimple.prototype.html = '<yield/>';
 
+  HeaderMenuSimple.prototype.init = function() {
+    return HeaderMenuSimple.__super__.init.apply(this, arguments);
+  };
+
   return HeaderMenuSimple;
 
 })(El$1.View);
@@ -6190,10 +6202,11 @@ HeaderMenuSimple.register();
 var HeaderMenuSimple$1 = HeaderMenuSimple;
 
 // node_modules/es-cookies/lib/cookies.mjs
-// src/cookies.coffee
-var Cookies$1$1;
 
-Cookies$1$1 = (function() {
+// src/cookies.coffee
+var Cookies;
+
+Cookies = (function() {
   function Cookies(defaults) {
     this.defaults = defaults != null ? defaults : {};
     this.get = (function(_this) {
@@ -6212,7 +6225,7 @@ Cookies$1$1 = (function() {
     })(this);
     this.remove = (function(_this) {
       return function(key, attrs) {
-        return _this.write(key, '', index$1({
+        return _this.write(key, '', index({
           expires: -1
         }, attrs));
       };
@@ -6225,7 +6238,7 @@ Cookies$1$1 = (function() {
   }
 
   Cookies.prototype.read = function(key) {
-    var cookie, cookies, err, i, kv, len, name, parts, rdecode, result;
+    var cookie, cookies, i, kv, len, name, parts, rdecode, result;
     if (!key) {
       result = {};
     }
@@ -6248,15 +6261,14 @@ Cookies$1$1 = (function() {
           result[name] = cookie;
         }
       } catch (error) {
-        
       }
     }
     return result;
   };
 
   Cookies.prototype.write = function(key, value, attrs) {
-    var attr, err, expires, name, result, strAttrs;
-    attrs = index$1({
+    var attr, expires, name, result, strAttrs;
+    attrs = index({
       path: '/'
     }, this.defaults, attrs);
     if (isNumber$1(attrs.expires)) {
@@ -6271,7 +6283,6 @@ Cookies$1$1 = (function() {
         value = result;
       }
     } catch (error) {
-      
     }
     value = encodeURIComponent(String(value)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
     key = encodeURIComponent(String(key));
@@ -6296,10 +6307,10 @@ Cookies$1$1 = (function() {
 
 })();
 
-var Cookies$1$2 = Cookies$1$1;
+var Cookies$1 = Cookies;
 
 // src/index.coffee
-var index$4 = new Cookies$1$2();
+var index$1 = new Cookies$1();
 
 // node_modules/es-md5/dist/md5.mjs
 var binl2rstr;
@@ -6539,7 +6550,7 @@ hexHMACMD5 = function(k, d) {
   return rstr2hex(rawHMACMD5(k, d));
 };
 
-var index$5 = md5 = function(string, key, raw) {
+var index$2 = md5 = function(string, key, raw) {
   if (!key) {
     if (!raw) {
       return hexMD5(string);
@@ -6553,35 +6564,36 @@ var index$5 = md5 = function(string, key, raw) {
 };
 
 // node_modules/akasha/lib/akasha.mjs
+
 // src/cookie-storage.coffee
 var cookieStorage = (function() {
   var key, postFix;
-  postFix = index$5(window.location.host);
+  postFix = index$2(window.location.host);
   key = function(k) {
     return k + "_" + postFix;
   };
   return {
     get: function(k) {
-      return index$4.getJSON(key(k));
+      return index$1.getJSON(key(k));
     },
-    set: function(k, v) {
+    set: function(k, v, opts) {
       var ks, ref;
-      ks = (ref = index$4.getJSON(key('_keys'))) != null ? ref : [];
+      ks = (ref = index$1.getJSON(key('_keys'))) != null ? ref : [];
       ks.push(k);
-      index$4.set(key('_keys'), ks);
-      return index$4.set(key(k), v);
+      index$1.set(key('_keys'), ks);
+      return index$1.set(key(k, opts), v);
     },
     remove: function(k) {
-      return index$4.remove(key(k));
+      return index$1.remove(key(k));
     },
     clear: function() {
       var i, k, ks, len, ref;
-      ks = (ref = index$4.getJSON(key('_keys'))) != null ? ref : [];
+      ks = (ref = index$1.getJSON(key('_keys'))) != null ? ref : [];
       for (i = 0, len = ks.length; i < len; i++) {
         k = ks[i];
-        index$4.remove(k);
+        index$1.remove(k);
       }
-      return index$4.remove(key('_keys'));
+      return index$1.remove(key('_keys'));
     }
   };
 })();
@@ -6590,7 +6602,24 @@ var cookieStorage = (function() {
 var storage = function(backend) {
   var root, store;
   root = typeof window === 'undefined' ? global : window;
-  store = root[backend + 'Storage'];
+  try {
+    store = root[backend + 'Storage'];
+  } catch (error) {
+    return {
+      get: function() {
+        return void 0;
+      },
+      set: function() {
+        return void 0;
+      },
+      remove: function() {
+        return void 0;
+      },
+      clear: function() {
+        return void 0;
+      }
+    };
+  }
   return {
     get: function(k) {
       try {
@@ -6600,7 +6629,7 @@ var storage = function(backend) {
         return void 0;
       }
     },
-    set: function(k, v) {
+    set: function(k, v, opts) {
       return store.setItem(k, JSON.stringify(v));
     },
     remove: function(k) {
@@ -6615,11 +6644,40 @@ var storage = function(backend) {
 // src/local-storage.coffee
 var localStorage = storage('local');
 
+// src/pretend-storage.coffee
+var pretendStorage = (function() {
+  var key, postFix, pretendStorage;
+  pretendStorage = {};
+  postFix = index$2(window.location.host);
+  key = function(k) {
+    return k + "_" + postFix;
+  };
+  return {
+    get: function(k) {
+      return pretendStorage[key(k)];
+    },
+    set: function(k, v, opts) {
+      return pretendStorage[key(k)] = v;
+    },
+    remove: function(k) {
+      return delete pretendStorage[key(k)];
+    },
+    clear: function() {
+      var results;
+      results = [];
+      for (key in pretendStorage) {
+        results.push(delete pretendStorage[key(k)]);
+      }
+      return results;
+    }
+  };
+})();
+
 // src/index.coffee
 var supported;
 
 supported = function(storage) {
-  var err, ok, testStr;
+  var ok, testStr;
   try {
     testStr = '__akasha__test__';
     storage.set(testStr, testStr);
@@ -6634,46 +6692,76 @@ supported = function(storage) {
 var index$3 = (function() {
   if (supported(localStorage)) {
     return localStorage;
-  } else {
+  } else if (supported(cookieStorage)) {
     return cookieStorage;
+  } else {
+    return pretendStorage;
   }
 })();
 
+// src/privacy-popup.coffee
+var PrivacyPopup,
+  extend$5 = function(child, parent) { for (var key in parent) { if (hasProp$5.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$5 = {}.hasOwnProperty;
+
+PrivacyPopup = (function(superClass) {
+  extend$5(PrivacyPopup, superClass);
+
+  function PrivacyPopup() {
+    return PrivacyPopup.__super__.constructor.apply(this, arguments);
+  }
+
+  PrivacyPopup.prototype.tag = 'privacy-popup';
+
+  PrivacyPopup.prototype.html = '<yield/>';
+
+  PrivacyPopup.prototype.init = function() {
+    return PrivacyPopup.__super__.init.apply(this, arguments);
+  };
+
+  PrivacyPopup.prototype.accept = function() {
+    return index$3.set('site.privacy.accepted', true);
+  };
+
+  PrivacyPopup.prototype.accepted = function() {
+    return !!(index$3.get('site.privacy.accepted'));
+  };
+
+  return PrivacyPopup;
+
+})(El$1.View);
+
+PrivacyPopup.register();
+
+var PrivacyPopup$1 = PrivacyPopup;
+
 // node_modules/es-ua-parser/src/ua-parser.js
-/**
- * UAParser.js v0.7.14
- * Lightweight JavaScript-based User-Agent string parser
- * https://github.com/faisalman/ua-parser-js
- *
- * Copyright © 2012-2016 Faisal Salman <fyzlman@gmail.com>
- * Dual licensed under GPLv2 & MIT
- */
 
 //////////////
 // Constants
 /////////////
 
 
-var LIBVERSION  = '0.7.14';
-var EMPTY       = '';
-var UNKNOWN     = '?';
-var FUNC_TYPE   = 'function';
-var UNDEF_TYPE  = 'undefined';
-var OBJ_TYPE    = 'object';
-var STR_TYPE    = 'string';
-var MAJOR       = 'major';
-var MODEL       = 'model';
-var NAME        = 'name';
-var TYPE        = 'type';
-var VENDOR      = 'vendor';
-var VERSION     = 'version';
-var ARCHITECTURE= 'architecture';
-var CONSOLE     = 'console';
-var MOBILE      = 'mobile';
-var TABLET      = 'tablet';
-var SMARTTV     = 'smarttv';
-var WEARABLE    = 'wearable';
-var EMBEDDED    = 'embedded';
+var LIBVERSION  = '0.7.14',
+    EMPTY       = '',
+    UNKNOWN     = '?',
+    FUNC_TYPE   = 'function',
+    UNDEF_TYPE  = 'undefined',
+    OBJ_TYPE    = 'object',
+    STR_TYPE    = 'string',
+    MAJOR       = 'major', // deprecated
+    MODEL       = 'model',
+    NAME        = 'name',
+    TYPE        = 'type',
+    VENDOR      = 'vendor',
+    VERSION     = 'version',
+    ARCHITECTURE= 'architecture',
+    CONSOLE     = 'console',
+    MOBILE      = 'mobile',
+    TABLET      = 'tablet',
+    SMARTTV     = 'smarttv',
+    WEARABLE    = 'wearable',
+    EMBEDDED    = 'embedded';
 
 
 ///////////
@@ -7639,29 +7727,23 @@ window.UAParser = UAParser;
 //   In AMD env the global scope should be kept clean, but jQuery is an exception.
 //   jQuery always exports to global scope, unless jQuery.noConflict(true) is used,
 //   and we should catch that.
-var $$3 = window && (window.jQuery || window.Zepto);
-if (typeof $$3 !== UNDEF_TYPE) {
+var $$1 = window && (window.jQuery || window.Zepto);
+if (typeof $$1 !== UNDEF_TYPE) {
     var parser = new UAParser();
-    $$3.ua = parser.getResult();
-    $$3.ua.get = function () {
+    $$1.ua = parser.getResult();
+    $$1.ua.get = function () {
         return parser.getUA();
     };
-    $$3.ua.set = function (uastring) {
+    $$1.ua.set = function (uastring) {
         parser.setUA(uastring);
         var result = parser.getResult();
         for (var prop in result) {
-            $$3.ua[prop] = result[prop];
+            $$1.ua[prop] = result[prop];
         }
     };
 }
 
 //  commonjsHelpers
-
-
-
-
-
-
 
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -7674,6 +7756,10 @@ var jsUuid = createCommonjsModule(function (module) {
 // The wrapped node-uuid library is at version 1.4.7
 
 function UUID () {
+
+  // Unique ID creation requires a high quality random # generator.  We feature
+  // detect to determine the best RNG source, normalizing to a function that
+  // returns 128-bits of randomness, since that's what's usually required
   var _rng, _mathRNG, _whatwgRNG;
 
   // Allow for MSIE11 msCrypto
@@ -7910,6 +7996,7 @@ if ('object' !== 'undefined' && module.exports) {
 });
 
 // node_modules/hanzo-analytics/lib/hanzo-analytics.mjs
+
 // node_modules/es-tostring/index.mjs
 var toString$1 = function(obj) {
   return Object.prototype.toString.call(obj)
@@ -7926,7 +8013,7 @@ var isNumber$1$1 = isNumber$2 = function(value) {
 // node_modules/es-object-assign/lib/es-object-assign.mjs
 // src/index.coffee
 var getOwnSymbols$1;
-var objectAssign$2;
+var objectAssign$1;
 var shouldUseNative$1;
 var toObject$1;
 var slice$1 = [].slice;
@@ -7941,7 +8028,7 @@ toObject$1 = function(val) {
 };
 
 shouldUseNative$1 = function() {
-  var err, i, j, k, len, letter, order2, ref, test1, test2, test3;
+  var i, j, k, len, letter, order2, ref, test1, test2, test3;
   try {
     if (!Object.assign) {
       return false;
@@ -7976,7 +8063,7 @@ shouldUseNative$1 = function() {
   }
 };
 
-var index$1$1 = objectAssign$2 = (function() {
+var index$1$1 = objectAssign$1 = (function() {
   if (shouldUseNative$1()) {
     return Object.assign;
   }
@@ -8008,9 +8095,9 @@ var index$1$1 = objectAssign$2 = (function() {
 
 // node_modules/es-cookies/lib/cookies.mjs
 // src/cookies.coffee
-var Cookies;
+var Cookies$2;
 
-Cookies = (function() {
+Cookies$2 = (function() {
   function Cookies(defaults) {
     this.defaults = defaults != null ? defaults : {};
     this.get = (function(_this) {
@@ -8042,7 +8129,7 @@ Cookies = (function() {
   }
 
   Cookies.prototype.read = function(key) {
-    var cookie, cookies, err, i, kv, len, name, parts, rdecode, result;
+    var cookie, cookies, i, kv, len, name, parts, rdecode, result;
     if (!key) {
       result = {};
     }
@@ -8065,14 +8152,13 @@ Cookies = (function() {
           result[name] = cookie;
         }
       } catch (error) {
-        
       }
     }
     return result;
   };
 
   Cookies.prototype.write = function(key, value, attrs) {
-    var attr, err, expires, name, result, strAttrs;
+    var attr, expires, name, result, strAttrs;
     attrs = index$1$1({
       path: '/'
     }, this.defaults, attrs);
@@ -8088,7 +8174,6 @@ Cookies = (function() {
         value = result;
       }
     } catch (error) {
-      
     }
     value = encodeURIComponent(String(value)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
     key = encodeURIComponent(String(key));
@@ -8113,10 +8198,10 @@ Cookies = (function() {
 
 })();
 
-var Cookies$1 = Cookies;
+var Cookies$1$1 = Cookies$2;
 
 // src/index.coffee
-var index$2 = new Cookies$1();
+var index$4 = new Cookies$1$1();
 
 // src/index.coffee
 var HanzoAnalytics;
@@ -8165,9 +8250,9 @@ if (typeof window !== "undefined" && window !== null) {
     queue: []
   };
   (function() {
-    var cachedDomain, cachedPageId, cachedPageViewId, cachedSessionId, cachedUuid, flush, getDomain, getPageId, getPageViewId, getQueryParams, getRecord, getSessionId, getTimestamp, getUserIdFromJWT, getUuid, next, refreshSession, saveRecord, updatePage;
+    var cachedDomain, cachedPageId, cachedPageViewId, cachedSessionId, cachedUuid, flush, getDomain, getQueryParams, getRecord, getSessionId, getTimestamp, getUserIdFromJWT, getUuid, next, refreshSession, saveRecord, updatePage;
     getUserIdFromJWT = function(jwt) {
-      var data, e, parts, str;
+      var data, parts, str;
       if (!jwt || typeof jwt !== 'string') {
         return null;
       }
@@ -8206,10 +8291,10 @@ if (typeof window !== "undefined" && window !== null) {
       if (cachedUuid) {
         return cachedUuid;
       }
-      uuid = index$2.get(uuidCookie);
+      uuid = index$4.get(uuidCookie);
       if (!uuid) {
         uuid = jsUuid.v4();
-        index$2.set(uuidCookie, uuid, {
+        index$4.set(uuidCookie, uuid, {
           domain: getDomain(),
           expires: uuidExpirationTime
         });
@@ -8223,10 +8308,10 @@ if (typeof window !== "undefined" && window !== null) {
       if (cachedSessionId) {
         return cachedSessionId;
       }
-      sessionId = index$2.get(sessionIdCookie);
+      sessionId = index$4.get(sessionIdCookie);
       if (!sessionId) {
         sessionId = getUuid() + '_' + getTimestamp();
-        index$2.set(sessionIdCookie, sessionId, {
+        index$4.set(sessionIdCookie, sessionId, {
           domain: getDomain(),
           expires: expirationTime
         });
@@ -8240,8 +8325,8 @@ if (typeof window !== "undefined" && window !== null) {
     };
     refreshSession = function() {
       var sessionId;
-      sessionId = index$2.get(sessionIdCookie);
-      return index$2.set(sessionIdCookie, sessionId, {
+      sessionId = index$4.get(sessionIdCookie);
+      return index$4.set(sessionIdCookie, sessionId, {
         domain: '.' + document.domain,
         expires: expirationTime
       });
@@ -8284,9 +8369,9 @@ if (typeof window !== "undefined" && window !== null) {
       r = {
         uuid: getUuid(),
         userId: getUserIdFromJWT(),
-        ga: index$2.get('_ga'),
-        gid: index$2.get('_gid'),
-        fr: index$2.get('fr'),
+        ga: index$4.get('_ga'),
+        gid: index$4.get('_gid'),
+        fr: index$4.get('fr'),
         sessionId: getSessionId(),
         pageId: record.pageId,
         pageViewId: record.pageViewId,
@@ -8296,7 +8381,7 @@ if (typeof window !== "undefined" && window !== null) {
         data: data,
         count: record.count
       };
-      userId = index$2.get(userCookie);
+      userId = index$4.get(userCookie);
       if (userId) {
         r.userId = userId;
       }
@@ -8392,11 +8477,7 @@ debounce = function(func, wait, immediate) {
 };
 
 // src/_content-annotator.coffee
-var Annotator;
-var get$targetAndSelector;
-var getScrollPosition;
-var getSelector;
-var isElementInViewport;
+var Annotator, get$targetAndSelector, getScrollPosition, getSelector, isElementInViewport;
 
 isElementInViewport = function(rect) {
   return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
@@ -8717,12 +8798,12 @@ Annotator = (function() {
 var Annotator$1 = Annotator;
 
 // src/hero.coffee
-var Hero;
-var extend$5 = function(child, parent) { for (var key in parent) { if (hasProp$4.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-var hasProp$4 = {}.hasOwnProperty;
+var Hero,
+  extend$6 = function(child, parent) { for (var key in parent) { if (hasProp$6.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$6 = {}.hasOwnProperty;
 
 Hero = (function(superClass) {
-  extend$5(Hero, superClass);
+  extend$6(Hero, superClass);
 
   function Hero() {
     Hero.__super__.constructor.apply(this, arguments);
@@ -8735,12 +8816,12 @@ Hero = (function(superClass) {
 var Hero$1 = Hero;
 
 // src/block.coffee
-var Block;
-var extend$6 = function(child, parent) { for (var key in parent) { if (hasProp$5.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-var hasProp$5 = {}.hasOwnProperty;
+var Block,
+  extend$7 = function(child, parent) { for (var key in parent) { if (hasProp$7.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$7 = {}.hasOwnProperty;
 
 Block = (function(superClass) {
-  extend$6(Block, superClass);
+  extend$7(Block, superClass);
 
   function Block() {
     Block.__super__.constructor.apply(this, arguments);
@@ -8753,12 +8834,12 @@ Block = (function(superClass) {
 var Block$1 = Block;
 
 // src/cta.coffee
-var CTA;
-var extend$7 = function(child, parent) { for (var key in parent) { if (hasProp$6.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-var hasProp$6 = {}.hasOwnProperty;
+var CTA,
+  extend$8 = function(child, parent) { for (var key in parent) { if (hasProp$8.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp$8 = {}.hasOwnProperty;
 
 CTA = (function(superClass) {
-  extend$7(CTA, superClass);
+  extend$8(CTA, superClass);
 
   function CTA() {
     CTA.__super__.constructor.apply(this, arguments);
@@ -8769,12 +8850,11 @@ CTA = (function(superClass) {
 })(Annotator$1);
 
 // src/index.coffee
-var start;
-var tagNames;
+var start, tagNames;
 
-tagNames = [HeaderMenuComplex$1.prototype.tag.toUpperCase(), HeaderMenuMobile$1.prototype.tag.toUpperCase(), HeaderMenuSimple$1.prototype.tag.toUpperCase()];
+tagNames = [HeaderMenuComplex$1.prototype.tag.toUpperCase(), HeaderMenuMobile$1.prototype.tag.toUpperCase(), HeaderMenuSimple$1.prototype.tag.toUpperCase(), PrivacyPopup$1.prototype.tag.toUpperCase()];
 
-var index = start = function(orgId) {
+var index$5 = start = function(orgId) {
   HanzoAnalytics$1.orgId = orgId;
   HanzoAnalytics$1.onFocus = function(record) {
     return console.log('Record', record);
@@ -8789,7 +8869,7 @@ var index = start = function(orgId) {
   return El$1.mount(tagNames.join(','));
 };
 
-return index;
+return index$5;
 
 }());
 //# sourceMappingURL=astley.js.map
