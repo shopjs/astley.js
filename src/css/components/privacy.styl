@@ -13,6 +13,7 @@ privacy-popup
 
     .cookies-content
       display: flex
+      flex-direction: row
       align-items: center
       max-width: $pageWidth
       margin: 0 auto
@@ -25,6 +26,13 @@ privacy-popup
 
         .cookies-description
           font-weight: 100
+
+      +below($tabletWidth)
+        flex-direction: column
+
+        .cookies-message
+          margin-right: 0
+          margin-bottom: $spacing * 2
 
     &.unaccepted
       bottom: 0px
