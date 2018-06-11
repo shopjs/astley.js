@@ -1,26 +1,30 @@
 @require '../material/mixins'
 
 privacy-popup
-  .cookies-content
+  .content
     display: block
     position: fixed
     width: 100vw
     bottom: -1000px
-    display: flex
     opacity: 0
     transition: all ($transitionTime * .5) ease-in-out
     padding: $spacing * 2 $spacing * 4
-    align-items: center
     background-color: $backgroundColor1
 
-    .cookies-message
-      margin-right: $spacing * 4
+    .cookies-content
+      display: flex
+      align-items: center
+      max-width: $pageWidth
+      margin: 0 auto
 
-      .cookies-title
-        margin-bottom: $spacing * 2
+      .cookies-message
+        margin-right: $spacing * 4
 
-      .cookies-description
-        font-weight: 100
+        .cookies-title
+          margin-bottom: $spacing * 2
+
+        .cookies-description
+          font-weight: 100
 
     &.unaccepted
       bottom: 0px
