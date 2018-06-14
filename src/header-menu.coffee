@@ -1,5 +1,4 @@
 import $ from 'zepto-modules'
-import { debounce } from './utils'
 
 $ ()->
   $window = $(window)
@@ -9,7 +8,7 @@ $ ()->
     else
       $('header').first().removeClass('undocked').addClass('docked')
 
-  $scrollableArea = $('.scrollable-area')
+  $scrollableArea = $('main')
   $scrollableArea.on 'DOMContentLoaded scroll', (e)->
     if $scrollableArea.scrollTop() > 10
       $('header').first().addClass('undocked').removeClass('docked')

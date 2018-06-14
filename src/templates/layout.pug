@@ -39,16 +39,15 @@ html(lang='en')
     // The scrollable body goes here
     // This exists to support optional css parallax
     // import css/parallax/parallax.styl to enable it
-    .scrollable-area.parallax
-      main
-        block contentbefore
-        block content
-          - for(var i in data.main) {
-            - let item = data.main[i]
-            if i == 0
-              include ./hero.pug
-          - }
-        block contentafter
+    main.parallax
+      block contentbefore
+      block content
+        - for(var i in data.main) {
+          - let item = data.main[i]
+          if i == 0
+            include ./hero.pug
+        - }
+      block contentafter
 
       block footer
         - {
