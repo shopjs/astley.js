@@ -1,5 +1,5 @@
 # debounce a function
-debounce = (func, wait, immediate)->
+debounce = (func, wait = 500, immediate = true)->
   timeout = null
   return ()->
     context = @

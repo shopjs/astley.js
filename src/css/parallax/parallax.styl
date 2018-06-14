@@ -1,0 +1,33 @@
+@require './mixins'
+
+.parallax
+  perspective: $perspective * 1px
+  -webkit-perspective: $perspective * 1px
+  -webkit-backface-visibility: hidden
+  -webkit-transform: translate3d(0,0,0)
+  overflow-x: hidden
+  overflow-y: auto
+  height: 100vh
+
+.parallax-layer
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  -webkit-backface-visibility: hidden
+  -webkit-transform: translate3d(0,0,0)
+
+.parallax-layer-base
+  transform: translateZ(0)
+
+.parallax-layer-back
+  parallaxize($zDist, $perspective)
+
+// needs fixed height
+.parallax-group
+  position: relative
+  transform-style: preserve-3d
+  -webkit-backface-visibility: hidden
+  -webkit-transform: translate3d(0,0,0)
+

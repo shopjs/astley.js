@@ -22,7 +22,6 @@ html(lang='en')
     <![endif]-->
 
   body(id=pageId)
-    //(style='overflow:hidden')
     // Header
 
     input#show-mobile-menu(type='checkbox')
@@ -37,24 +36,28 @@ html(lang='en')
             block headercontentafter
       - }
 
-    main
-      block contentbefore
-      block content
-        - for(var i in data.main) {
-          - let item = data.main[i]
-          if i == 0
-            include ./hero.pug
-        - }
-      block contentafter
+    // The scrollable body goes here
+    // This exists to support optional css parallax
+    // import css/parallax/parallax.styl to enable it
+    .scrollable-area.parallax
+      main
+        block contentbefore
+        block content
+          - for(var i in data.main) {
+            - let item = data.main[i]
+            if i == 0
+              include ./hero.pug
+          - }
+        block contentafter
 
-    block footer
-      - {
-      -   let item = data.footer || data.header
-          footer
-            block footercontentbefore
-            include ./footer.pug
-            block footercontentafter
-      - }
+      block footer
+        - {
+        -   let item = data.footer || data.header
+            footer
+              block footercontentbefore
+              include ./footer.pug
+              block footercontentafter
+        - }
 
     block privacypopup
       privacy-popup
