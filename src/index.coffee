@@ -12,6 +12,8 @@ import CTA                  from './cta'
 
 import HanzoAnalytics from 'hanzo-analytics'
 
+import './animate'
+
 tagNames = [
   HeaderMenuComplex::tag.toUpperCase()
   HeaderMenuMobile::tag.toUpperCase()
@@ -25,10 +27,11 @@ export default start = (orgId) ->
     console.log 'Record', record
   HanzoAnalytics.flushRate = 10000
 
-  $('hero, .hero').each (i, el) ->
-    new Hero(el)
+  # disable annotation for now
+  # $('hero, .hero').each (i, el) ->
+  #   new Hero(el)
 
-  $('block, .block').each (i, el) ->
-    new Block(el)
+  # $('block, .block').each (i, el) ->
+  #   new Block(el)
 
   El.mount tagNames.join ','
