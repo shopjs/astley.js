@@ -6039,10 +6039,18 @@ var El$1 = El;
 // src/header-menu.coffee
 
 _default(function() {
-  var $window;
+  var $scrollableArea, $window;
   $window = _default(window);
-  return $window.on('DOMContentLoaded scroll', function(e) {
+  $window.on('DOMContentLoaded scroll', function(e) {
     if ($window.scrollTop() > 10) {
+      return _default('header').first().addClass('undocked').removeClass('docked');
+    } else {
+      return _default('header').first().removeClass('undocked').addClass('docked');
+    }
+  });
+  $scrollableArea = _default('main');
+  return $scrollableArea.on('DOMContentLoaded scroll', function(e) {
+    if ($scrollableArea.scrollTop() > 10) {
       return _default('header').first().addClass('undocked').removeClass('docked');
     } else {
       return _default('header').first().removeClass('undocked').addClass('docked');
@@ -8456,6 +8464,12 @@ var debounce;
 
 debounce = function(func, wait, immediate) {
   var timeout;
+  if (wait == null) {
+    wait = 10;
+  }
+  if (immediate == null) {
+    immediate = false;
+  }
   timeout = null;
   return function() {
     var args, callNow, context, later;
@@ -8737,8 +8751,6 @@ Annotator = (function() {
         scrollY: y,
         contentX: rect.left,
         contentY: rect.top,
-        viewportX: rect.left,
-        viewportY: rect.top,
         viewportX: document.documentElement.clientHeight,
         viewportY: document.documentElement.clientWidth
       });
@@ -8849,23 +8861,100 @@ CTA = (function(superClass) {
 
 })(Annotator$1);
 
+// src/animate.coffee
+var triggerDist;
+
+triggerDist = 40;
+
+_default.fn.extend = function(obj) {
+  return _default.extend(_default.fn, obj);
+};
+
+_default.fn.extend({
+  animateCss: function(animationName, callback) {
+    var animationEnd;
+    animationEnd = (function(el) {
+      var animations, t;
+      animations = {
+        animation: 'animationend',
+        OAnimation: 'oAnimationEnd',
+        MozAnimation: 'mozAnimationEnd',
+        WebkitAnimation: 'webkitAnimationEnd'
+      };
+      for (t in animations) {
+        if (el.style[t] !== void 0) {
+          return animations[t];
+        }
+      }
+    })(document.createElement('div'));
+    this.addClass('animated ' + animationName).one(animationEnd, function() {
+      _default(this).removeClass('animated ' + animationName);
+      if (typeof callback === 'function') {
+        callback();
+      }
+    });
+    return this;
+  }
+});
+
+_default(function() {
+  var $scrollableArea, $window, fn;
+  fn = function() {
+    var height, ref, ref1, width;
+    width = (ref = Math.max(document.documentElement.clientWidth, window.innerWidth)) != null ? ref : 0;
+    height = (ref1 = Math.max(document.documentElement.clientHeight, window.innerHeight)) != null ? ref1 : 0;
+    _default('[data-animate-in]:not(.animated-in)').each(function() {
+      var $el, el, rect;
+      el = this;
+      $el = _default(el);
+      rect = el.getBoundingClientRect();
+      if (rect.top < height + triggerDist && rect.bottom > -triggerDist) {
+        return $el.animateCss($el.attr('data-animate-in'), function() {
+          return $el.addClass('animated-in');
+        });
+      }
+    });
+    return _default('.animated-in').each(function() {
+      var $el, el, rect;
+      el = this;
+      $el = _default(el);
+      rect = el.getBoundingClientRect();
+      if (!$el.attr('data-animate-out')) {
+        return;
+      }
+      if (rect.top >= height + triggerDist * 2 || rect.bottom <= triggerDist * -2) {
+        return $el.animateCss($el.attr('data-animate-out'), function() {
+          return $el.removeClass('animated-in');
+        });
+      }
+    });
+  };
+  $window = _default(window);
+  $window.on('DOMContentLoaded scroll', fn);
+  $scrollableArea = _default('main');
+  return $scrollableArea.on('DOMContentLoaded scroll', fn);
+});
+
 // src/index.coffee
 var start, tagNames;
 
 tagNames = [HeaderMenuComplex$1.prototype.tag.toUpperCase(), HeaderMenuMobile$1.prototype.tag.toUpperCase(), HeaderMenuSimple$1.prototype.tag.toUpperCase(), PrivacyPopup$1.prototype.tag.toUpperCase()];
 
-var index$5 = start = function(orgId) {
+var index$5 = start = function(orgId, analyticsEnabled) {
   HanzoAnalytics$1.orgId = orgId;
   HanzoAnalytics$1.onFocus = function(record) {
     return console.log('Record', record);
   };
   HanzoAnalytics$1.flushRate = 10000;
-  _default('hero, .hero').each(function(i, el) {
-    return new Hero$1(el);
-  });
-  _default('block, .block').each(function(i, el) {
-    return new Block$1(el);
-  });
+  analyticsEnabled = !!analyticsEnabled;
+  if (analyticsEnabled) {
+    _default('hero, .hero').each(function(i, el) {
+      return new Hero$1(el);
+    });
+    _default('block, .block').each(function(i, el) {
+      return new Block$1(el);
+    });
+  }
   return El$1.mount(tagNames.join(','));
 };
 
