@@ -260,8 +260,6 @@ class Annotator
         scrollY:    y
         contentX:   rect.left
         contentY:   rect.top
-        viewportX:   rect.left
-        viewportY:   rect.top
         viewportX:  document.documentElement.clientHeight
         viewportY:  document.documentElement.clientWidth
 

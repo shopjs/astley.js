@@ -21,17 +21,19 @@ tagNames = [
   PrivacyPopup::tag.toUpperCase()
 ]
 
-export default start = (orgId) ->
+export default start = (orgId, analyticsEnabled) ->
   HanzoAnalytics.orgId = orgId
   HanzoAnalytics.onFocus = (record) ->
     console.log 'Record', record
   HanzoAnalytics.flushRate = 10000
 
-  # disable annotation for now
-  # $('hero, .hero').each (i, el) ->
-  #   new Hero(el)
+  analyticsEnabled = !!analyticsEnabled
+  if analyticsEnabled
+    # disable annotation for now
+    $('hero, .hero').each (i, el) ->
+      new Hero(el)
 
-  # $('block, .block').each (i, el) ->
-  #   new Block(el)
+    $('block, .block').each (i, el) ->
+      new Block(el)
 
   El.mount tagNames.join ','
