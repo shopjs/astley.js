@@ -1,40 +1,66 @@
-.m-table.m-table
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  text-align: center
-  margin: 0
+@require 'mixins'
 
+.m-table
+  display: table
+  width: 100%
+  padding: 0
+  background-color: $white
+  border-radius: $mBorderRadius
+  mShadowed(1.5, $mDropShadowCardColor)
+
+// borders
+.m-table-header
+.m-table-row
   & > *
-    padding $mSpacing * 2
-    width: 100%
+    border-bottom: 1px solid rgba(0,0,0,0.12)
 
-  .m-table-header
-    display: flex
-    flex-direction: column
-    align-items: center
-    padding: $mSpacing * 1.5rem
-
-  .m-table-row
-  .m-table-row-header
-    text-align: left
-    display: flex
-    flex-direction: row
-    padding: $mSpacing $mSpacing * 1.5 $mSpacing $mSpacing
-    align-items: center
-
-    border-bottom: 1px solid $mDividerColor
-
+  &:last-child
     & > *
-      flex: 1
-      margin-right: $mSpacing * 1.5
-      overflow: auto
-
-      &:last-child
-        margin-right: 0
-
-    &:last-child
       border-bottom: 0
 
-  .m-table-row-header
-    padding: $mSpacing * 1.25 $mSpacing * 1.5 $mSpacing * 1.25 $mSpacing
+.m-table-header
+  display: table-header-group
+  background-color: $mPrimaryColor
+  color: $white
+
+  & > *
+    display: table-cell
+    vertical-align: middle
+    padding: ($mSpacing / 2)
+    cursor: default
+    border: 0
+    margin: 0
+    padding: $mSpacing * 1.5 0 $mSpacing
+
+    &:first-child
+      padding-left: $mSpacing !important
+
+    &:last-child
+      padding-right: $mSpacing !important
+
+.m-table-row
+  display: table-row
+  transition: all $mTransitionTime ease-in-out
+
+  & > *
+    display: table-cell
+    vertical-align: middle
+    position: relative
+    padding: $mSpacing 0
+
+    &:first-child
+      padding-left: $mSpacing !important
+
+    &:last-child
+      padding-right: $mSpacing !important
+
+// .m-table-row
+//   cursor: pointer
+
+.m-table-cell
+  padding: $mSpacing * 2
+
+.m-no-padding
+  padding: $mSpacing * 2 0 !important
+  p
+    padding: 0 $mSpacing * 5
